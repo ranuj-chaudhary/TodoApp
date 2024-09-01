@@ -1,35 +1,18 @@
-import { useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useMemo, useState } from 'react';
+import { sortTodo } from '../../reducers/reducers';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterData } from '../../utils/helper';
 
 export const TodoSort = function TodoSort() {
   const [sortBy, setSortBy] = useState('');
   const { todos } = useSelector((state) => state.todo);
+  const dispatch = useDispatch();
 
-  const filteredTodos = useMemo(
-    () => filterData(sortBy, todos),
-    [sortBy, todos]
-  );
+  const filteredTodos = useMemo(() => {
+    return filterData(todos, sortBy);
+  }, [sortBy, todos]);
 
-  console.log(filteredTodos);
-
-  function filterData(sortBy, todos) {
-    let filteredData = [];
-    if (sortBy === 'Alphabetically') {
-      filteredData = todos((a, b) => a.content - b.content);
-    } else if (sortBy === 'Date') {
-      filteredData = todos((taskA, taskB) => {
-        const dateA = new Date(taskA.timeStamp);
-        const dateB = new Date(taskB.timeStamp);
-        return dateA - dateB;
-      });
-    } else if (sortBy === 'Importance') {
-      filteredData = todos((taskA, taskB) =>
-        taskA.urgentTask === taskB.urgentTask ? 0 : taskA.urgentTask ? -1 : 1
-      );
-    }
-    return filteredData;
-  }
-
+  
   function handleSortBy(e) {
     setSortBy(e.target.value);
   }
@@ -45,9 +28,9 @@ export const TodoSort = function TodoSort() {
           className="p-2"
         >
           <option value="">select to sort</option>
-          <option value="Alphabetically">Alphabetically</option>
-          <option value="By-Date">By Date</option>
-          <option value="Importance">Importance</option>
+          <option value="alphabetically">Alphabetically</option>
+          <option value="date">By Date</option>
+          <option value="importance">Importance</option>
         </select>
       </div>
     </div>

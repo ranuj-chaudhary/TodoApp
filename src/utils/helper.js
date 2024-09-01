@@ -29,3 +29,30 @@ export function getCurrentDate() {
 
   return date.toDateString();
 }
+
+export function filterData(todos, sortBy = '') {
+  if (sortBy.length === 0) return todos;
+  let filteredData = [];
+  if (sortBy === 'alphabetically') {
+    filteredData = todos.sort((a, b) => {
+      if (a.content < b.content) {
+        return -1;
+      }
+      if (a.content > b.content) {
+        return 1;
+      }
+      return 0;
+    });
+  } else if (sortBy === 'date') {
+    filteredData = todos.sort((taskA, taskB) => {
+      const dateA = new Date(taskA.timeStamp);
+      const dateB = new Date(taskB.timeStamp);
+      return dateA - dateB;
+    });
+  } else if (sortBy === 'importance') {
+    filteredData = todos.sort((taskA, taskB) =>
+      taskA.urgentTask === taskB.urgentTask ? 0 : taskA.urgentTask ? -1 : 1
+    );
+  }
+  return filteredData;
+}

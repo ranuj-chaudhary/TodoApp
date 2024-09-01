@@ -20,7 +20,7 @@ const initialState = {
       id: '1',
       content: 'Advice the redux',
       taskCompleted: true,
-      timeStamp: '2024-08-31T15:28:43+05:30',
+      timeStamp: '2024-01-31T15:28:43+05:30',
       urgentTask: false,
       private: false,
       heading: 'Redux',
@@ -30,21 +30,21 @@ const initialState = {
       id: '3',
       content: 'Thunk the redux',
       taskCompleted: false,
-      timeStamp: '2024-08-31T15:28:43+05:30',
+      timeStamp: '2024-02-31T15:28:43+05:30',
       urgentTask: false,
       private: false,
       heading: 'Redux',
-      dueDate: '2024-08-31T15:28:43+05:30',
+      dueDate: '2024-06-31T15:28:43+05:30',
     },
     {
       id: '2',
       content: 'Flux the redux',
       taskCompleted: true,
-      timeStamp: '2024-08-31T15:28:43+05:30',
-      urgentTask: false,
+      timeStamp: '2024-05-31T15:28:43+05:30',
+      urgentTask: true,
       isPrivate: false,
       heading: 'Redux',
-      dueDate: '2024-08-31T15:28:43+05:30',
+      dueDate: '2024-02-31T15:28:43+05:30',
     },
   ],
   deletedTodos: [],
@@ -92,7 +92,6 @@ function todoReducer(state = initialState, action) {
       };
 
     case actiontypes.SORT_TODO:
- 
       return {
         ...state,
       };
@@ -146,10 +145,10 @@ export const completeTask = function (id, status) {
 };
 // // ACTION CREATORS SORTBY
 
-export const sortTodo = function (sortBy) {
+export const sortTodo = function (data, sortBy) {
   return {
     type: actiontypes.SORT_TODO,
-    payload: { sortBy },
+    payload: { sortBy, data },
   };
 };
 
