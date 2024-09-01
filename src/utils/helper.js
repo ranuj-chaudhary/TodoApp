@@ -27,7 +27,5 @@ export function getCurrentDateTime(date) {
 export function getCurrentDate() {
   const date = new Date();
 
-  return {
-    date: date.toDateString(),
-  };
+  return date.toDateString();
 }

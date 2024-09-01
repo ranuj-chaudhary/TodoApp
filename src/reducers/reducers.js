@@ -8,6 +8,7 @@ const actiontypes = {
   DELETE_TODO: 'DELETE_TODO',
   ERROR: '',
   TASK_COMPLETED: 'TASK_COMPLETED',
+  SORT_TODO: 'SORT_TODO',
 };
 
 const initialState = {
@@ -17,30 +18,33 @@ const initialState = {
   todos: [
     {
       id: '1',
-      content: 'Revise the redux',
+      content: 'Advice the redux',
       taskCompleted: true,
       timeStamp: '2024-08-31T15:28:43+05:30',
       urgentTask: false,
       private: false,
       heading: 'Redux',
-    },
-    {
-      id: '2',
-      content: 'Revise the redux',
-      taskCompleted: true,
-      timeStamp: '2024-08-31T15:28:43+05:30',
-      urgentTask: false,
-      isPrivate: false,
-      heading: 'Redux',
+      dueDate: '2024-08-31T15:28:43+05:30',
     },
     {
       id: '3',
-      content: 'Revise the redux',
+      content: 'Thunk the redux',
       taskCompleted: false,
       timeStamp: '2024-08-31T15:28:43+05:30',
       urgentTask: false,
       private: false,
       heading: 'Redux',
+      dueDate: '2024-08-31T15:28:43+05:30',
+    },
+    {
+      id: '2',
+      content: 'Flux the redux',
+      taskCompleted: true,
+      timeStamp: '2024-08-31T15:28:43+05:30',
+      urgentTask: false,
+      isPrivate: false,
+      heading: 'Redux',
+      dueDate: '2024-08-31T15:28:43+05:30',
     },
   ],
   deletedTodos: [],
@@ -87,6 +91,11 @@ function todoReducer(state = initialState, action) {
         todos: [...updatedTodos],
       };
 
+    case actiontypes.SORT_TODO:
+ 
+      return {
+        ...state,
+      };
     default:
       return {
         ...state,
@@ -94,7 +103,7 @@ function todoReducer(state = initialState, action) {
   }
 }
 
-// ACTION CREATORS
+// ACTION CREATORS TODO
 export const addTodo = function addTodo(task) {
   const { taskTodo, heading } = task;
 
@@ -133,6 +142,14 @@ export const completeTask = function (id, status) {
   return {
     type: actiontypes.TASK_COMPLETED,
     payload: { id, status },
+  };
+};
+// // ACTION CREATORS SORTBY
+
+export const sortTodo = function (sortBy) {
+  return {
+    type: actiontypes.SORT_TODO,
+    payload: { sortBy },
   };
 };
 

@@ -1,33 +1,37 @@
 import { getCurrentDate } from '../../utils/helper';
+import { AiFillHome } from 'react-icons/ai';
 
-export const TodoHeader = function ({ children }) {
+import { TodoTheme } from './TodoTheme';
+import { TodoSort } from './TodoSort';
+
+export function TodoHeader() {
+  return (
+    <header className="pt-4 pb-4 pl-6 pr-12  text-black flex justify-between">
+      <TodoHeading />
+      <TodoFeauture>
+        <TodoSort />
+        <TodoTheme />
+      </TodoFeauture>
+    </header>
+  );
+}
+
+function TodoHeading() {
   const date = getCurrentDate();
 
   return (
-    <header>
-      <TodoHeading />
-    </header>
-  );
-};
-
-function TodoHeading() {
-  return (
-    <div className="presentDate">
-      <h1>My Day</h1>
-      <p>{date}</p>
+    <div className="presentDate flex gap-4 font-bold">
+      <button>
+        <AiFillHome size={24} />
+      </button>
+      <div>
+        <h1>My Day</h1>
+        <p>{date}</p>
+      </div>
     </div>
   );
 }
-function SortTodo() {
-  return (
-    <div className="sort__todo">
-      <select name="" id="">
-        <option value="">select to sort</option>
-        <option value="">Alphabetically</option>
-        <option value="">by date</option>
-        <option value="">1</option>
-        <option value="">1</option>
-      </select>
-    </div>
-  );
+
+function TodoFeauture({ children }) {
+  return <div className="flex gap-4">{children}</div>;
 }
