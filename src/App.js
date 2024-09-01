@@ -1,8 +1,7 @@
 import { Provider } from 'react-redux';
-import { store } from './Todo_redux/store';
+import { store } from './store';
 
 import './App.css';
-
 import TodoLayout from './Layout';
 // LAYOUT
 

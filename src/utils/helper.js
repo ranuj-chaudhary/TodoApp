@@ -23,3 +23,11 @@ export function getCurrentDateTime(date) {
     presentTime,
   };
 }
+
+export function getCurrentDate() {
+  const date = new Date();
+
+  return {
+    date: date.toDateString(),
+  };
+}

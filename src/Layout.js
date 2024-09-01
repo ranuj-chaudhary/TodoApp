@@ -1,14 +1,10 @@
 // RE-USABLE COMPONENTS
-import RenderWithToggle from './Todo_redux/shared/withToggle';
+import RenderWithToggle from './shared/withToggle';
 
 // COMPONENTS
-import { TodosContainer } from './Todo_redux/components/TodosContainer';
-import { Sidebar } from './Todo_redux/components/Sidebar';
-import {
-  IncompleteTasks,
-  CompletedTasks,
-  AddTask,
-} from './Todo_redux/components/Tasks';
+import { TodosContainer } from './components/TodosContainer';
+import { Sidebar } from './components/Sidebar';
+import { IncompleteTasks, CompletedTasks, AddTask } from './components/Tasks';
 
 export default function TodoLayout() {
   return (
