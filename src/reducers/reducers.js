@@ -1,6 +1,5 @@
 import uniqid from 'uniqid';
 import moment from 'moment/moment';
-
 // ACTION TYPES
 
 const actiontypes = {
@@ -9,6 +8,7 @@ const actiontypes = {
   ERROR: '',
   TASK_COMPLETED: 'TASK_COMPLETED',
   SORT_TODO: 'SORT_TODO',
+  URGENT_TASK: 'URGENT_TASK',
 };
 
 const initialState = {
@@ -23,25 +23,52 @@ const initialState = {
       timeStamp: '2024-01-31T15:28:43+05:30',
       urgentTask: false,
       private: false,
-      heading: 'Redux',
       dueDate: '2024-08-31T15:28:43+05:30',
     },
     {
-      id: '3',
+      id: '2',
       content: 'Thunk the redux',
       taskCompleted: false,
-      timeStamp: '2024-02-31T15:28:43+05:30',
+      timeStamp: '2024-01-31T15:28:43+05:30',
       urgentTask: false,
       private: false,
-      heading: 'Redux',
       dueDate: '2024-06-31T15:28:43+05:30',
     },
     {
-      id: '2',
+      id: '3',
       content: 'Flux the redux',
       taskCompleted: true,
       timeStamp: '2024-05-31T15:28:43+05:30',
       urgentTask: true,
+      isPrivate: false,
+      dueDate: '2024-02-31T15:28:43+05:30',
+    },
+    {
+      id: '4',
+      content: 'Store the redux',
+      taskCompleted: true,
+      timeStamp: '2024-05-31T15:28:43+05:30',
+      urgentTask: true,
+      isPrivate: false,
+      heading: 'Redux',
+      dueDate: '2024-02-31T15:28:43+05:30',
+    },
+    {
+      id: '5',
+      content: 'Action Creators the redux',
+      taskCompleted: true,
+      timeStamp: '2024-05-31T15:28:43+05:30',
+      urgentTask: false,
+      isPrivate: false,
+      heading: 'Redux',
+      dueDate: '2024-02-31T15:28:43+05:30',
+    },
+    {
+      id: '6',
+      content: 'Reducer the redux',
+      taskCompleted: true,
+      timeStamp: '2024-05-31T15:28:43+05:30',
+      urgentTask: false,
       isPrivate: false,
       heading: 'Redux',
       dueDate: '2024-02-31T15:28:43+05:30',
@@ -51,6 +78,7 @@ const initialState = {
   category: ['grocery', 'office work', 'personal work'],
   error: '',
   is_admin: false,
+  sortBy: '',
 };
 
 // REDUCER
@@ -90,10 +118,28 @@ function todoReducer(state = initialState, action) {
         ...state,
         todos: [...updatedTodos],
       };
+    case actiontypes.URGENT_TASK:
+      console.log(action);
+      const updatedUrgentTask = state.todos.map((item) => {
+        if (item.id === action.payload.id) {
+          const changeStatus = item.urgentTask;
+          return {
+            ...item,
+            urgentTask: !changeStatus,
+          };
+        } else {
+          return item;
+        }
+      });
 
+      return {
+        ...state,
+        todos: [...updatedUrgentTask],
+      };
     case actiontypes.SORT_TODO:
       return {
         ...state,
+        sortBy: action.payload.sortBy,
       };
     default:
       return {
@@ -103,9 +149,7 @@ function todoReducer(state = initialState, action) {
 }
 
 // ACTION CREATORS TODO
-export const addTodo = function addTodo(task) {
-  const { taskTodo, heading } = task;
-
+export const addTodo = function addTodo(taskTodo) {
   let id = uniqid();
   const timeStamp = moment().format();
 
@@ -116,7 +160,6 @@ export const addTodo = function addTodo(task) {
     timeStamp: timeStamp,
     urgentTask: false,
     isPrivate: false,
-    heading,
   };
   return {
     type: actiontypes.ADD_TODO,
@@ -130,6 +173,7 @@ export const deleteTodo = function (id) {
     payload: { id },
   };
 };
+
 export const errorMessage = function (erroMessage) {
   return {
     type: actiontypes.ERROR,
@@ -143,12 +187,20 @@ export const completeTask = function (id, status) {
     payload: { id, status },
   };
 };
+
+export const updateUrgentTask = function (id) {
+  return {
+    type: actiontypes.URGENT_TASK,
+    payload: { id },
+  };
+};
+
 // // ACTION CREATORS SORTBY
 
-export const sortTodo = function (data, sortBy) {
+export const sortTodo = function (sortBy) {
   return {
     type: actiontypes.SORT_TODO,
-    payload: { sortBy, data },
+    payload: { sortBy },
   };
 };
 

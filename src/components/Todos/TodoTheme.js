@@ -17,7 +17,7 @@ export const TodoTheme = () => {
   return (
     <div className="todo__theme relative">
       <button
-        className="bg-white opacity-60 p-3 border-0 rounded-md hover:opacity-85"
+        className="bg-white opacity-70 p-3 border-0 rounded-md hover:opacity-95"
         onClick={() => setToggle((toggle) => !toggle)}
       >
         <AiOutlineMore size={18} />

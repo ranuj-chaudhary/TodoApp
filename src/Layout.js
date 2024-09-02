@@ -1,30 +1,14 @@
 // RE-USABLE COMPONENTS
-import RenderWithToggle from './shared/withToggle';
 
-// COMPONENTS
-import { TodosContainer } from './components/TodosContainer';
 import { Sidebar } from './components/Sidebar';
-import { IncompleteTasks, CompletedTasks, AddTask } from './components/Tasks';
-import { TodoHeader } from './components/Todos/TodoHeader';
-import { ThemeContextProvider } from './context/useThemeContext';
+
+import { Home } from './pages/Home';
+
 export default function TodoLayout() {
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex h-screen relative">
       <Sidebar />
-      <ThemeContextProvider>
-        <TodosContainer>
-          <TodoHeader />
-          <RenderWithToggle
-            ComponentToRender={IncompleteTasks}
-            toggleName={'Incomplete Tasks'}
-          />
-          <RenderWithToggle
-            ComponentToRender={CompletedTasks}
-            toggleName={'Complete Tasks'}
-          />
-          <AddTask />
-        </TodosContainer>
-      </ThemeContextProvider>
+      <Home />
     </div>
   );
 }
