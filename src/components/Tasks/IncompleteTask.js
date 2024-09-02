@@ -1,10 +1,14 @@
 import { useSelector } from 'react-redux';
 import { Todo } from '../Todos/Todo';
+import { filterData } from '../../utils/helper';
 
 export function IncompleteTasks() {
-  const { todos } = useSelector((state) => state.todo);
-  const incomleteTasks = todos.filter((task) => task.taskCompleted === false);
-
+  const { todos, sortBy } = useSelector((state) => state.todo);
+  const sortedData = filterData(todos, sortBy);
+  const incomleteTasks = sortedData.filter(
+    (task) => task.taskCompleted === false
+  );
+  console.log(todos);
   return (
     <ul className="incomplete_task flex flex-col gap-4 p-4">
       {todos &&

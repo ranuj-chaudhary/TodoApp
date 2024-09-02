@@ -3,10 +3,18 @@ import { AiFillHome } from 'react-icons/ai';
 
 import { TodoTheme } from './TodoTheme';
 import { TodoSort } from './TodoSort';
+import { useSelector } from 'react-redux';
+import { useTheme } from '../../context/useThemeContext';
+
+const headerStyle = {
+  header:
+    'pt-8 pb-4 pl-6 pr-12 text-black flex justify-between sticky top-0 z-50',
+};
 
 export function TodoHeader() {
+  const { currentTheme } = useTheme();
   return (
-    <header className="pt-4 pb-4 pl-6 pr-12  text-black flex justify-between">
+    <header className={`${headerStyle.header} ${currentTheme.style}`}>
       <TodoHeading />
       <TodoFeauture>
         <TodoSort />
