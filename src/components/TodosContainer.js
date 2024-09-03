@@ -10,7 +10,7 @@ export const TodosContainer = ({ children }) => {
   const { currentTheme } = useTheme();
 
   return (
-    <div className={`${todoContainerStyle.container} ${currentTheme.style}  `}>
+    <div className={`${todoContainerStyle.container} ${currentTheme.style}`}>
       {children}
     </div>
   );

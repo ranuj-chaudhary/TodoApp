@@ -1,14 +1,14 @@
 // RE-USABLE COMPONENTS
 
-import { Sidebar } from './components/Sidebar';
+import { Sidebar } from './components/Sidebar/Sidebar';
 
-import { Home } from './pages/Home';
+import { MyDayTodo } from './pages/MyDayTodo';
 
 export default function TodoLayout() {
   return (
     <div className="flex h-screen relative">
       <Sidebar />
-      <Home />
+      <MyDayTodo />
     </div>
   );
 }

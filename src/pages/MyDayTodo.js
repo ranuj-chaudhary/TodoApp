@@ -4,7 +4,7 @@ import { TodosContainer } from '../components/TodosContainer';
 import { ThemeContextProvider } from '../context/useThemeContext';
 import RenderWithToggle from '../shared/withToggle';
 
-export function Home() {
+export function MyDayTodo() {
   return (
     <ThemeContextProvider>
       <TodosContainer>
