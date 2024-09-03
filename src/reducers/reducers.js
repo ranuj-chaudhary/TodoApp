@@ -1,5 +1,12 @@
 import uniqid from 'uniqid';
 import moment from 'moment/moment';
+import {
+  SunIcon,
+  StarLineIcon,
+  MenuIcon,
+  HomeIcon,
+  UnorderedListIcon,
+} from '../icons/icons';
 // ACTION TYPES
 
 const actiontypes = {
@@ -9,6 +16,7 @@ const actiontypes = {
   TASK_COMPLETED: 'TASK_COMPLETED',
   SORT_TODO: 'SORT_TODO',
   URGENT_TASK: 'URGENT_TASK',
+  ADD_CUSTOMLIST: 'ADD_CUSTOMLIST',
 };
 
 const initialState = {
@@ -79,10 +87,45 @@ const initialState = {
   error: '',
   is_admin: false,
   sortBy: '',
+  defaultList: [
+    {
+      name: 'My day',
+      icon: <SunIcon className="text-blue-300" />,
+      link: 'url',
+      id: 1,
+    },
+    {
+      name: 'Important',
+      icon: <StarLineIcon className="text-pink-500" />,
+      link: 'url',
+      id: 2,
+    },
+    {
+      name: 'Planned',
+      icon: <MenuIcon />,
+      link: 'url',
+      id: 3,
+    },
+    {
+      name: 'Task',
+      icon: <HomeIcon className="text-pink-500" />,
+      link: 'url',
+      id: 4,
+    },
+  ],
+  customList: [
+    {
+      name: 'My day',
+      icon: <UnorderedListIcon className="text-blue-300" />,
+      link: 'url',
+      id: 1232,
+    },
+  ],
 };
 
 // REDUCER
 function todoReducer(state = initialState, action) {
+  console.log(action);
   switch (action.type) {
     case actiontypes.ADD_TODO:
       return {
@@ -119,7 +162,6 @@ function todoReducer(state = initialState, action) {
         todos: [...updatedTodos],
       };
     case actiontypes.URGENT_TASK:
-      console.log(action);
       const updatedUrgentTask = state.todos.map((item) => {
         if (item.id === action.payload.id) {
           const changeStatus = item.urgentTask;
@@ -140,6 +182,12 @@ function todoReducer(state = initialState, action) {
       return {
         ...state,
         sortBy: action.payload.sortBy,
+      };
+    case actiontypes.ADD_CUSTOMLIST:
+      console.log(action);
+      return {
+        ...state,
+        customList: [...state.customList, action.payload.list],
       };
     default:
       return {
@@ -201,6 +249,23 @@ export const sortTodo = function (sortBy) {
   return {
     type: actiontypes.SORT_TODO,
     payload: { sortBy },
+  };
+};
+
+export const addCustomList = function (listName) {
+  let id = uniqid();
+  if (listName.length === 0) {
+    listName = 'untitled list';
+  }
+  const newList = {
+    name: listName,
+    icon: <UnorderedListIcon className="text-blue-300" />,
+    link: 'url',
+    id,
+  };
+  return {
+    type: actiontypes.ADD_CUSTOMLIST,
+    payload: { list: newList },
   };
 };
 

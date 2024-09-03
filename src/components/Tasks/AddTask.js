@@ -37,7 +37,6 @@ export const AddTask = () => {
     removeErrorIfAllInput(task);
   }
 
-  function handleAddTask() {}
   function handleOnKeyUp(event) {
     if (event.key === 'Enter') {
       if (taskTodo) {
