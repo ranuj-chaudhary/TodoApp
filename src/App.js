@@ -1,16 +1,40 @@
 import { Provider } from 'react-redux';
+import { Route, Routes } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
+import { Suspense } from 'react';
+import './App.css';
 import { store } from './store';
 
-import './App.css';
+// Pages
 import TodoLayout from './Layout';
-// LAYOUT
+import { MyDay } from './pages/MyDay';
+import { ImportantTodo } from './pages/ImportantTodo';
+import { TasksTodo } from './pages/TasksTodo';
+
 
 function App() {
+  
+
   return (
     <Provider store={store}>
-      <TodoLayout />
+      <BrowserRouter>
+        <Suspense fallback={<p> Error </p>}>
+          <Routes>
+            <Route path="/" element={<TodoLayout />}>
+              <Route path="myday" element={<MyDay />} />
+              <Route path="important" element={<ImportantTodo />} />
+              <Route path="tasks" element={<TasksTodo />} />
+              <Route path="*" element={<Error />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
     </Provider>
   );
+}
+
+function Error() {
+  return <p>Error loading todo</p>;
 }
 
 export default App;

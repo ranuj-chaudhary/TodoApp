@@ -56,3 +56,60 @@ export function filterData(todos, sortBy = '') {
   }
   return filteredData;
 }
+
+export function findTotalTaskByList(list, todos) {
+  let totalTask = 0;
+  switch (list) {
+    case 'Complete_Tasks':
+      const totalCompleteTasks = todos.filter(
+        (item) => item.taskCompleted === true
+      );
+      return totalCompleteTasks.length;
+    case 'Incomplete_Tasks':
+      const totalIncompleteTasks = todos.filter(
+        (item) => item.taskCompleted === false
+      );
+      return totalIncompleteTasks.length;
+    case 'Important':
+      const totalImportantTasks = todos.filter(
+        (item) => item.urgentTask === true
+      );
+      return totalImportantTasks.length;
+    case 'Completed':
+      const TotalTodayCompletedTasks = filteredCompletedTodayTasks(todos);
+      return TotalTodayCompletedTasks.length;
+    case 'Incompleted':
+      const TotalTodayIncompletedTasks = filteredIncompletedTodayTasks(todos);
+      return TotalTodayIncompletedTasks.length;
+    case 'TotalTask':
+      const todayCompletedTasks = filteredCompletedTodayTasks(todos);
+      const todayIncompletedTasks = filteredIncompletedTodayTasks(todos);
+      return todayCompletedTasks.length + todayIncompletedTasks.length;
+    default:
+      return totalTask;
+  }
+}
+
+// TASK HELPERS
+export function filteredCompletedTodayTasks(data) {
+  return data.filter((task) => {
+    const date = new Date().toISOString();
+    const today = getCurrentDateTime(date);
+    const todoDate = getCurrentDateTime(task.timeStamp);
+
+    return (
+      today.presentDate === todoDate.presentDate && task.taskCompleted === true
+    );
+  });
+}
+
+export function filteredIncompletedTodayTasks(data) {
+  return data.filter((task) => {
+    const date = new Date().toISOString();
+    const today = getCurrentDateTime(date);
+    const todoDate = getCurrentDateTime(task.timeStamp);
+    return (
+      today.presentDate === todoDate.presentDate && task.taskCompleted === false
+    );
+  });
+}

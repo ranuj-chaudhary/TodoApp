@@ -8,7 +8,6 @@ export function IncompleteTasks() {
   const incomleteTasks = sortedData.filter(
     (task) => task.taskCompleted === false
   );
-  console.log(todos);
   return (
     <ul className="incomplete_task flex flex-col gap-4 p-4">
       {todos &&

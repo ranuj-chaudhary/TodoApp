@@ -59,7 +59,7 @@ const initialState = {
       urgentTask: true,
       isPrivate: false,
       heading: 'Redux',
-      dueDate: '2024-02-31T15:28:43+05:30',
+      dueDate: '2024-02-25T15:28:43+05:30',
     },
     {
       id: '5',
@@ -91,26 +91,23 @@ const initialState = {
     {
       name: 'My day',
       icon: <SunIcon className="text-blue-300" />,
-      link: 'url',
+      url: 'myday',
       id: 1,
+      listKey: 'TotalTodayTask',
     },
     {
       name: 'Important',
       icon: <StarLineIcon className="text-pink-500" />,
-      link: 'url',
+      url: 'important',
       id: 2,
-    },
-    {
-      name: 'Planned',
-      icon: <MenuIcon />,
-      link: 'url',
-      id: 3,
+      listKey: 'Important',
     },
     {
       name: 'Task',
       icon: <HomeIcon className="text-pink-500" />,
-      link: 'url',
+      url: 'tasks',
       id: 4,
+      listKey: 'TotalTask',
     },
   ],
   customList: [
@@ -125,7 +122,6 @@ const initialState = {
 
 // REDUCER
 function todoReducer(state = initialState, action) {
-  console.log(action);
   switch (action.type) {
     case actiontypes.ADD_TODO:
       return {
@@ -184,7 +180,6 @@ function todoReducer(state = initialState, action) {
         sortBy: action.payload.sortBy,
       };
     case actiontypes.ADD_CUSTOMLIST:
-      console.log(action);
       return {
         ...state,
         customList: [...state.customList, action.payload.list],

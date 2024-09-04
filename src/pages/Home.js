@@ -3,21 +3,22 @@ import { TodoHeader } from '../components/Todos/TodoHeader';
 import { TodosContainer } from '../components/TodosContainer';
 import { ThemeContextProvider } from '../context/useThemeContext';
 import RenderWithToggle from '../shared/withToggle';
-
-export function MyDayTodo() {
+import { Outlet } from 'react-router';
+export function Home() {
   return (
     <ThemeContextProvider>
       <TodosContainer>
         <section>
           <TodoHeader />
-          <RenderWithToggle
+          <Outlet />
+          {/* <RenderWithToggle
             ComponentToRender={IncompleteTasks}
-            toggleName={'Incomplete_Tasks'}
+            listName={'Incomplete_Tasks'}
           />
           <RenderWithToggle
             ComponentToRender={CompletedTasks}
-            toggleName={'Complete_Tasks'}
-          />
+            listName={'Complete_Tasks'}
+          /> */}
         </section>
         <AddTask />
       </TodosContainer>

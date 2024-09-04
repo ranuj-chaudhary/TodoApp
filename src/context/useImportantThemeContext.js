@@ -4,7 +4,7 @@ import { useContext } from 'react';
 export const SET_THEME = 'SET_THEME';
 
 // create context
-const ThemeContext = createContext();
+const ImportantThemeContext = createContext();
 
 const initialState = {
   themeColors: [
@@ -47,9 +47,9 @@ function ImportantThemeContextProvider({ children }) {
     initialState
   );
   return (
-    <ThemeContext.Provider value={{ themeColors, currentTheme, dispatch }}>
+    <ImportantThemeContext.Provider value={{ themeColors, currentTheme, dispatch }}>
       {children}
-    </ThemeContext.Provider>
+    </ImportantThemeContext.Provider>
   );
 }
 
@@ -74,7 +74,7 @@ function reducer(state, action) {
 }
 
 function useImportantTheme() {
-  const context = useContext(ThemeContext);
+  const context = useContext(ImportantThemeContext);
   //   if (context === undefined) return undefined;
   return context;
 }
