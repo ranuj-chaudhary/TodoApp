@@ -7,7 +7,8 @@ import { AiOutlinePlus } from 'react-icons/ai';
 const addTaskStyle = {
   button:
     'ml-4 bg-blue-400 p-2 border font-bold text-white rounded-md hover:bg-blue-500',
-  input: ' border-black rounded-md pl-10 flex-grow py-4 shadow-md',
+  input:
+    ' border-black rounded-md pl-10 flex-grow py-4 shadow-md focus:outline-blue-300 focus:border-b-[1px] focus:border-blue',
   section: 'fixed pt-4 pb-4  right-0 bottom-0 w-4/5 bg-transparent',
 };
 
@@ -48,7 +49,7 @@ export const AddTask = () => {
   return (
     <div className={`${addTaskStyle.section} ${currentTheme.style} `}>
       <div className="add__task w-full">
-        <div className="add_todo__container flex p-12  items-center gap-4">
+        <div className="add_todo__container flex p-6 items-center gap-4">
           <label htmlFor="todo-task" hidden>
             Input task to add:
           </label>

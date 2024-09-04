@@ -60,12 +60,12 @@ export function filterData(todos, sortBy = '') {
 export function findTotalTaskByList(list, todos) {
   let totalTask = 0;
   switch (list) {
-    case 'Complete_Tasks':
+    case 'Done':
       const totalCompleteTasks = todos.filter(
         (item) => item.taskCompleted === true
       );
       return totalCompleteTasks.length;
-    case 'Incomplete_Tasks':
+    case 'Pending':
       const totalIncompleteTasks = todos.filter(
         (item) => item.taskCompleted === false
       );
