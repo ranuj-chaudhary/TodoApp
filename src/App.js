@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux';
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import { Suspense } from 'react';
 import './App.css';
@@ -11,10 +11,7 @@ import { MyDay } from './pages/MyDay';
 import { ImportantTodo } from './pages/ImportantTodo';
 import { TasksTodo } from './pages/TasksTodo';
 
-
 function App() {
-  
-
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -24,8 +21,12 @@ function App() {
               <Route path="myday" element={<MyDay />} />
               <Route path="important" element={<ImportantTodo />} />
               <Route path="tasks" element={<TasksTodo />} />
-              <Route path="*" element={<Error />} />
+              <Route
+                path="*"
+                element={<Navigate to="/myday" replace={true} />}
+              />
             </Route>
+            <Route path="*" element={<Navigate to="/myday" replace={true} />} />
           </Routes>
         </Suspense>
       </BrowserRouter>

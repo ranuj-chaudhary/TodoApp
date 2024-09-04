@@ -3,7 +3,6 @@ import { AiOutlineMore } from 'react-icons/ai';
 import { useTheme } from '../../context/useThemeContext';
 import { SET_THEME } from '../../context/useThemeContext';
 
-
 export const TodoTheme = () => {
   const [toggle, setToggle] = useState(false);
   const { dispatch, themeColors, currentTheme } = useTheme();
@@ -17,7 +16,7 @@ export const TodoTheme = () => {
   return (
     <div className="todo__theme relative">
       <button
-        className="bg-white opacity-70 p-3 border-0 rounded-md hover:opacity-95"
+        className="bg-white  opacity-80 hover:opacity-95 p-2.5 rounded-md transition-colors duration-300"
         onClick={() => setToggle((toggle) => !toggle)}
       >
         <AiOutlineMore size={18} />

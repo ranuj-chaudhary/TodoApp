@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { findTotalTaskByList } from '../../utils/helper';
 export function ListItem({ list, onSelectid, selectedId, listStyle }) {
   const { name, id, icon, url } = list;
   const { todos } = useSelector((state) => state.todo);
-
+  const totalTask = findTotalTaskByList(name, todos);
   return (
     <Link to={`${url}`}>
       <li
@@ -16,7 +17,7 @@ export function ListItem({ list, onSelectid, selectedId, listStyle }) {
           {icon} <span>{name}</span>
         </div>
         <div>
-          <span>{1}</span>
+          <span>{totalTask !== 0 ? totalTask : ''}</span>
         </div>
       </li>
     </Link>

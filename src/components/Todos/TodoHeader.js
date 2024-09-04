@@ -40,5 +40,5 @@ function TodoHeading() {
 }
 
 function TodoFeauture({ children }) {
-  return <div className="flex gap-4">{children}</div>;
+  return <div className="flex gap-2 items-center">{children}</div>;
 }
