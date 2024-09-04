@@ -85,6 +85,12 @@ export function findTotalTaskByList(list, todos) {
       const todayCompletedTasks = filteredCompletedTodayTasks(todos);
       const todayIncompletedTasks = filteredIncompletedTodayTasks(todos);
       return todayCompletedTasks.length + todayIncompletedTasks.length;
+    case 'My day':
+      const mydayCompletedTasks = filteredCompletedTodayTasks(todos);
+      const mydayIncompletedTasks = filteredIncompletedTodayTasks(todos);
+      return mydayCompletedTasks.length + mydayIncompletedTasks.length;
+    case 'Task':
+      return todos.length;
     default:
       return totalTask;
   }
