@@ -3,7 +3,6 @@ import { AiFillHome } from 'react-icons/ai';
 
 import { TodoTheme } from './TodoTheme';
 import { TodoSort } from './TodoSort';
-import { useSelector } from 'react-redux';
 import { useTheme } from '../../context/useThemeContext';
 
 const headerStyle = {

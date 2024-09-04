@@ -2,7 +2,6 @@ import { useDispatch } from 'react-redux';
 import { AiFillStar } from 'react-icons/ai';
 import { completeTask } from '../../reducers/reducers';
 import { getCurrentDateTime } from '../../utils/helper';
-import { useState } from 'react';
 import { updateUrgentTask } from '../../reducers/reducers';
 export const Todo = ({ todo }) => {
   const dispatch = useDispatch();
