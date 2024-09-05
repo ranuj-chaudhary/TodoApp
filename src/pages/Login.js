@@ -1,9 +1,35 @@
+import { useEffect, useRef, useState } from 'react';
 import { todoImage } from '../assets';
-console.log(todoImage)
+import { useNavigate } from 'react-router';
+import { useAuth } from '../context/AuthContext';
+
 export function Login() {
+  const [email, setEmail] = useState('');
+  const [password, SetPassword] = useState('');
+  const ref = useRef(null);
+  const navigate = useNavigate();
+  const { isAuthenticated, login, user } = useAuth();
+  console.log(isAuthenticated);
+  useEffect(
+    function () {
+      if (isAuthenticated) {
+        navigate('/app', {
+          replace: true,
+        });
+      }
+    },
+    [isAuthenticated, navigate]
+  );
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(email, password);
+    if (email && password) login(email, password);
+  }
+
   return (
     <>
-      <div className="flex justify-evenly">
+      <div className="flex justify-evenly" >
         <div className="login__form flex min-h-full flex-col px-6 py-12 lg:px-8 w-3/5">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <img
@@ -17,7 +43,7 @@ export function Login() {
           </div>
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form action="#" method="POST" className="space-y-6">
+            <form action="#" className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="email"
@@ -33,6 +59,8 @@ export function Login() {
                     required
                     autoComplete="email"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
               </div>
@@ -62,6 +90,8 @@ export function Login() {
                     required
                     autoComplete="current-password"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    value={password}
+                    onChange={(e) => SetPassword(e.target.value)}
                   />
                 </div>
               </div>
@@ -89,10 +119,12 @@ export function Login() {
         </div>
 
         <div className="todo-image w-96 flex items-center justify-center w-2/5">
-            <img src={`${todoImage}`} alt="todo" className='w-full object-cover' />
+          <img
+            src={`${todoImage}`}
+            alt="todo"
+            className="w-full object-cover"
+          />
         </div>
-
-
       </div>
     </>
   );
