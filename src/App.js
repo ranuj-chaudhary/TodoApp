@@ -10,26 +10,31 @@ import TodoLayout from './Layout';
 import { MyDay } from './pages/MyDay';
 import { ImportantTodo } from './pages/ImportantTodo';
 import { TasksTodo } from './pages/TasksTodo';
+import { Login } from './pages/Login';
+import { ThemeContextProvider } from './context/useThemeContext';
 
 function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <Suspense fallback={<p> Error </p>}>
-          <Routes>
-            <Route path="/" element={<TodoLayout />}>
-              <Route path="myday" element={<MyDay />} />
-              <Route path="important" element={<ImportantTodo />} />
-              <Route path="tasks" element={<TasksTodo />} />
-              <Route
-                path="*"
-                element={<Navigate to="/myday" replace={true} />}
-              />
-            </Route>
-            <Route path="*" element={<Navigate to="/myday" replace={true} />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
+      <ThemeContextProvider>
+        <BrowserRouter>
+          <Suspense fallback={<p> Error </p>}>
+            <Routes>
+              <Route index element={<Login />} />
+              <Route path="app" element={<TodoLayout />}>
+                <Route path="myday" element={<MyDay />} />
+                <Route path="important" element={<ImportantTodo />} />
+                <Route path="tasks" element={<TasksTodo />} />
+                <Route
+                  path="*"
+                  element={<Navigate to="myday" replace={true} />}
+                />
+              </Route>
+              <Route path="*" element={<Navigate to="/" replace={true} />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </ThemeContextProvider>
     </Provider>
   );
 }
