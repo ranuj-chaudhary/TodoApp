@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Suspense } from 'react';
 import './App.css';
 import { store } from './store';
-
+import { AuthProvider } from './context/AuthContext';
 // Pages
 import TodoLayout from './Layout';
 import { MyDay } from './pages/MyDay';
@@ -12,29 +12,38 @@ import { ImportantTodo } from './pages/ImportantTodo';
 import { TasksTodo } from './pages/TasksTodo';
 import { Login } from './pages/Login';
 import { ThemeContextProvider } from './context/useThemeContext';
-
+import ProtectedRoute from './components/ProtectedRoute';
 function App() {
   return (
     <Provider store={store}>
-      <ThemeContextProvider>
-        <BrowserRouter>
-          <Suspense fallback={<p> Error </p>}>
-            <Routes>
-              <Route index element={<Login />} />
-              <Route path="app" element={<TodoLayout />}>
-                <Route path="myday" element={<MyDay />} />
-                <Route path="important" element={<ImportantTodo />} />
-                <Route path="tasks" element={<TasksTodo />} />
+      <AuthProvider>
+        <ThemeContextProvider>
+          <BrowserRouter>
+            <Suspense fallback={<p> Error </p>}>
+              <Routes>
+                <Route index element={<Login />} />
                 <Route
-                  path="*"
-                  element={<Navigate to="myday" replace={true} />}
-                />
-              </Route>
-              <Route path="*" element={<Navigate to="/" replace={true} />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </ThemeContextProvider>
+                  path="app"
+                  element={
+                    <ProtectedRoute>
+                      <TodoLayout />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route path="myday" element={<MyDay />} />
+                  <Route path="important" element={<ImportantTodo />} />
+                  <Route path="tasks" element={<TasksTodo />} />
+                  <Route
+                    path="*"
+                    element={<Navigate to="myday" replace={true} />}
+                  />
+                </Route>
+                <Route path="*" element={<Navigate to="/" replace={true} />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </ThemeContextProvider>
+      </AuthProvider>
     </Provider>
   );
 }
