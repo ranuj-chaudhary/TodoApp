@@ -17,7 +17,7 @@ export const TodoSort = function TodoSort() {
           name=""
           onChange={handleSortBy}
           id=""
-          className="p-2 opacity-80 hover:opacity-90 transition-colors duration-300 cursor-pointer rounded-md"
+          className="p-2 bg-white  focus:opacity-90 transition-colors duration-300 cursor-pointer rounded-md outline-blue-400"
         >
           <option value="">select to sort</option>
           <option value="alphabetically">Alphabetically</option>
