@@ -4,7 +4,12 @@ const AuthContext = createContext();
 
 const initialState = {
   isAuthenticated: false,
-  user: null,
+  user: {
+    name: "Ranuj Chaudhary",
+    email: "ranujchoudhary@gmail.com",
+    password: "Ranuj@2378",
+    userImage: "https://i.pravatar.cc/100?u=zz",
+  },
 };
 
 function reducer(state, action) {

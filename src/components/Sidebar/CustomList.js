@@ -8,7 +8,7 @@ export function CustomList({ selectedId, onSelectid }) {
   const { customList } = useSelector((state) => state.todo);
 
   return (
-    <div className="custom__list mt-2 overflow-y-auto h-2/5">
+    <div className="custom__list mt-6 overflow-y-auto h-2/5">
       <div className="list">
         {
           <ul>

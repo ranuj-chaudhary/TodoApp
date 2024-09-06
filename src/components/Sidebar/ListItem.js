@@ -5,8 +5,7 @@ export function ListItem({ list, onSelectid, selectedId, listStyle }) {
   const { name, id, icon, url } = list;
   const { todos } = useSelector((state) => state.todo);
   const totalTask = findTotalTaskByList(name, todos);
- 
-  
+
   return (
     <Link to={`${url}`}>
       <li
@@ -16,7 +15,7 @@ export function ListItem({ list, onSelectid, selectedId, listStyle }) {
         onClick={() => onSelectid(id)}
       >
         <div className="flex gap-3 items-center">
-          {icon} <span>{name}</span>
+          {icon} <span className="capitalize">{name}</span>
         </div>
         <div>
           <span>{totalTask !== 0 ? totalTask : ''}</span>

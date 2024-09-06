@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { findTotalTaskByList } from '../../utils/helper';
+import { removeSpaceFromString } from '../../utils/helper';
 
 export function CustomListItem({ list, onSelectid, selectedId, listStyle }) {
   const { name, id, icon, url } = list;
   const { todos } = useSelector((state) => state.todo);
   const totalTask = findTotalTaskByList(name, todos);
-  const type = name.replace(' ', '').toLowerCase();
- 
-  
+  const type = removeSpaceFromString(name);
+
   return (
     <Link to={`${url}?type=${type}`}>
       <li
@@ -18,7 +18,7 @@ export function CustomListItem({ list, onSelectid, selectedId, listStyle }) {
         onClick={() => onSelectid(id)}
       >
         <div className="flex gap-3 items-center">
-          {icon} <span>{name}</span>
+          {icon} <span className='capitalize'>{name}</span>
         </div>
         <div>
           <span>{totalTask !== 0 ? totalTask : ''}</span>

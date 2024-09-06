@@ -18,8 +18,8 @@ export function IncompleteTasks() {
   );
 
   // IF QUERY PARAM TYPE EXIST FILTER DATA BY LIST TYPE
-  if (listType.length > 0) {
-    incomleteTasks = sortedData.filter((task) => task.category === listType);
+  if (listType?.length > 0) {
+    incomleteTasks = incomleteTasks.filter((task) => task.category === listType);
   }
 
   return (
