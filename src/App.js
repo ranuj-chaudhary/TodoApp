@@ -13,6 +13,7 @@ import { TasksTodo } from './pages/TasksTodo';
 import { Login } from './pages/Login';
 import { ThemeContextProvider } from './context/useThemeContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import { CustomList } from './pages/CustomList';
 function App() {
   return (
     <Provider store={store}>
@@ -30,15 +31,20 @@ function App() {
                     </ProtectedRoute>
                   }
                 >
+                  <Route
+                    path="/app"
+                    element={<Navigate to="myday" replace={true} />}
+                  />
                   <Route path="myday" element={<MyDay />} />
                   <Route path="important" element={<ImportantTodo />} />
                   <Route path="tasks" element={<TasksTodo />} />
+                  <Route path="customlist" element={<CustomList />} />
+
                   <Route
                     path="*"
                     element={<Navigate to="myday" replace={true} />}
                   />
                 </Route>
-                <Route path="*" element={<Navigate to="/" replace={true} />} />
               </Routes>
             </Suspense>
           </BrowserRouter>

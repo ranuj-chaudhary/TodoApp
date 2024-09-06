@@ -32,6 +32,7 @@ const initialState = {
       urgentTask: false,
       private: false,
       dueDate: '2024-08-31T15:28:43+05:30',
+      category: 'react',
     },
     {
       id: '2',
@@ -41,6 +42,7 @@ const initialState = {
       urgentTask: false,
       private: false,
       dueDate: '2024-06-31T15:28:43+05:30',
+      category: 'javascript',
     },
     {
       id: '3',
@@ -50,6 +52,7 @@ const initialState = {
       urgentTask: true,
       isPrivate: false,
       dueDate: '2024-02-31T15:28:43+05:30',
+      category: 'react',
     },
     {
       id: '4',
@@ -60,6 +63,7 @@ const initialState = {
       isPrivate: false,
       heading: 'Redux',
       dueDate: '2024-02-25T15:28:43+05:30',
+      category: 'javascript',
     },
     {
       id: '5',
@@ -70,6 +74,7 @@ const initialState = {
       isPrivate: false,
       heading: 'Redux',
       dueDate: '2024-02-31T15:28:43+05:30',
+      category: 'javascript',
     },
     {
       id: '6',
@@ -80,6 +85,7 @@ const initialState = {
       isPrivate: false,
       heading: 'Redux',
       dueDate: '2024-02-31T15:28:43+05:30',
+      category: 'javascript',
     },
   ],
   deletedTodos: [],
@@ -112,10 +118,16 @@ const initialState = {
   ],
   customList: [
     {
-      name: 'My day',
+      name: 'Javascript',
       icon: <UnorderedListIcon className="text-blue-300" />,
-      link: 'url',
+      url: 'customlist',
       id: 1232,
+    },
+    {
+      name: 'React',
+      icon: <UnorderedListIcon className="text-blue-300" />,
+      url: 'customlist',
+      id: 12,
     },
   ],
 };

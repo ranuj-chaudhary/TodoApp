@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
-import { ListItem } from './ListItem';
-
+import { CustomListItem } from './CustomListItem';
 const customListStyle = {
   list: 'mb-2 flex items-center justify-between p-[6px] hover:bg-gray-100 active:scale-95 transition-colors transition-transform duration-300 cursor-pointer ',
 };
@@ -14,7 +13,7 @@ export function CustomList({ selectedId, onSelectid }) {
         {
           <ul>
             {customList.map((list, idx) => (
-              <ListItem
+              <CustomListItem
                 key={idx}
                 list={list}
                 onSelectid={onSelectid}
