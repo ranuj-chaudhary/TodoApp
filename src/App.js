@@ -26,9 +26,9 @@ function App() {
                 <Route
                   path="app"
                   element={
-                    <ProtectedRoute>
+                   
                       <TodoLayout />
-                    </ProtectedRoute>
+                   
                   }
                 >
                   <Route

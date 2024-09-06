@@ -119,3 +119,7 @@ export function filteredIncompletedTodayTasks(data) {
     );
   });
 }
+
+export function removeSpaceFromString(stringName) {
+  return stringName.replace(' ', '');
+}

@@ -17,8 +17,8 @@ export function CompletedTasks() {
   let completedTasks = sortedData.filter((task) => task.taskCompleted === true);
 
   // IF QUERY PARAM TYPE EXIST FILTER DATA BY LIST TYPE
-  if (listType.length > 0) {
-    completedTasks = sortedData.filter((task) => task.category === listType);
+  if (listType?.length > 0) {
+    completedTasks = completedTasks.filter((task) => task.category === listType);
   }
   return (
     <ul className="complete_task flex flex-col gap-4 p-4">

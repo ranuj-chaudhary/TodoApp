@@ -32,7 +32,7 @@ const initialState = {
       urgentTask: false,
       private: false,
       dueDate: '2024-08-31T15:28:43+05:30',
-      category: 'react',
+      category: 'task',
     },
     {
       id: '2',
@@ -118,13 +118,13 @@ const initialState = {
   ],
   customList: [
     {
-      name: 'Javascript',
+      name: 'javascript',
       icon: <UnorderedListIcon className="text-blue-300" />,
       url: 'customlist',
       id: 1232,
     },
     {
-      name: 'React',
+      name: 'react',
       icon: <UnorderedListIcon className="text-blue-300" />,
       url: 'customlist',
       id: 12,
@@ -204,9 +204,10 @@ function todoReducer(state = initialState, action) {
 }
 
 // ACTION CREATORS TODO
-export const addTodo = function addTodo(taskTodo) {
+export const addTodo = function addTodo(taskTodo, category) {
   let id = uniqid();
   const timeStamp = moment().format();
+  const listCategory = category.length > 0 ? category : 'task';
 
   const todo = {
     id,
@@ -215,6 +216,8 @@ export const addTodo = function addTodo(taskTodo) {
     timeStamp: timeStamp,
     urgentTask: false,
     isPrivate: false,
+    category: listCategory,
+    dueDate: '2024-02-31T15:28:43+05:30',
   };
   return {
     type: actiontypes.ADD_TODO,
@@ -264,12 +267,14 @@ export const addCustomList = function (listName) {
   if (listName.length === 0) {
     listName = 'untitled list';
   }
+
   const newList = {
-    name: listName,
+    name: listName.toLowerCase(),
     icon: <UnorderedListIcon className="text-blue-300" />,
-    link: 'url',
+    url: 'customlist',
     id,
   };
+  console.log(newList);
   return {
     type: actiontypes.ADD_CUSTOMLIST,
     payload: { list: newList },
