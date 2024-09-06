@@ -69,7 +69,7 @@ export const AddTask = () => {
           />
           <SelectListType
             onSelectListType={handleSelectListType}
-            listtype={listType}
+            listType={listType}
           />
         </div>
         <div className="pl-6 ">
@@ -83,16 +83,28 @@ export const AddTask = () => {
 };
 
 function SelectListType({ listType, onSelectListType }) {
+  const { currentTheme } = useTheme();
+
   const { customList } = useSelector((state) => state.todo);
+  const selectListStyle = {
+    select:
+      'capitalize h-12  outline-2 outline-black w-36 pl-2 rounded-md border-none  bg-opacity-75 hover:bg-opacity-85 transition-colors duration-300',
+  };
+  console.log(listType);
   return (
-    <div className="select__list absolute right-10 h-auto ">
+    <div
+      className={`select__list absolute right-7 h-auto rounded-md flex items-center ${
+        listType?.length > 0 ? 'border-2 border-gray-800' : ''
+      }`}
+    >
       <select
         name=""
         id=""
-        className="capitalize h-8 bg-blue-200 w-48 pl-2 rounded-md border-none outline-none bg-opacity-75 hover:bg-opacity-85 transition-colors duration-300"
+        className={`${selectListStyle.select} ${currentTheme.style}`}
         value={listType}
         onChange={onSelectListType}
       >
+        <option value="">add category</option>
         {customList &&
           customList.length > 0 &&
           customList.map((list) => {

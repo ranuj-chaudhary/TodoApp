@@ -3,6 +3,11 @@ import { AiOutlineMore } from 'react-icons/ai';
 import { useTheme } from '../../context/useThemeContext';
 import { SET_THEME } from '../../context/useThemeContext';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
+
+const todoThemeStyle = {
+  button:
+    'bg-white opacity-80 hover:opacity-100 p-2.5 rounded-md transition-colors duration-200',
+};
 export const TodoTheme = () => {
   const [toggle, setToggle] = useState(false);
   const { dispatch, themeColors, currentTheme } = useTheme();
@@ -21,10 +26,13 @@ export const TodoTheme = () => {
     e.stopPropagation();
     setToggle((toggle) => !toggle);
   }
+
   return (
     <div className="todo__theme relative">
       <button
-        className="bg-white  opacity-80 hover:opacity-95 p-2.5 rounded-md transition-colors duration-300"
+        className={`${todoThemeStyle.button} ${
+          toggle ? 'border-2 border-blue-400 opacity-100' : ''
+        }`}
         onClick={handleToggle}
       >
         <AiOutlineMore size={18} />
@@ -32,7 +40,7 @@ export const TodoTheme = () => {
       {toggle && (
         <div
           ref={ref}
-          className="absolute p-2 w-72 bg-white right-0 rounded-md mt-2 bg-opacity-90	"
+          className="absolute p-2 w-72 bg-white right-0 rounded-md mt-2	shadow-sm shadow-blue-400"
         >
           <p className="pt-2 pb-2 font-bold">Themes</p>
           <div className="theme_list">
