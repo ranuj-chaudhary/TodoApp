@@ -1,28 +1,39 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { AiOutlineMore } from 'react-icons/ai';
 import { useTheme } from '../../context/useThemeContext';
 import { SET_THEME } from '../../context/useThemeContext';
-
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 export const TodoTheme = () => {
   const [toggle, setToggle] = useState(false);
   const { dispatch, themeColors, currentTheme } = useTheme();
   const [seletedTheme, setSelectedTheme] = useState(currentTheme.id);
+  const ref = useRef(null);
 
+  // outside click toggle
+  useOutsideClick(ref, () => setToggle(false));
   // HANDLERS
   function handleThemeChange(id) {
     dispatch({ type: SET_THEME, payload: { id } });
     setSelectedTheme(id);
   }
+
+  function handleToggle(e) {
+    e.stopPropagation();
+    setToggle((toggle) => !toggle);
+  }
   return (
     <div className="todo__theme relative">
       <button
         className="bg-white  opacity-80 hover:opacity-95 p-2.5 rounded-md transition-colors duration-300"
-        onClick={() => setToggle((toggle) => !toggle)}
+        onClick={handleToggle}
       >
         <AiOutlineMore size={18} />
       </button>
       {toggle && (
-        <div className="absolute p-2 w-72 bg-white right-0 rounded-md mt-2 bg-opacity-90	">
+        <div
+          ref={ref}
+          className="absolute p-2 w-72 bg-white right-0 rounded-md mt-2 bg-opacity-90	"
+        >
           <p className="pt-2 pb-2 font-bold">Themes</p>
           <div className="theme_list">
             <ul className="flex flex-wrap gap-2">
