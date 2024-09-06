@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 
 // icons
@@ -9,6 +9,7 @@ import {
   SettingIcon,
   LogoutIcon,
 } from '../../icons/icons';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 // styles
 const profilteStyles = {
@@ -26,8 +27,13 @@ const profilteStyles = {
 export function Profile() {
   const { user, logout } = useAuth();
   const [toggle, setToggle] = useState(false);
+  const ref = useRef(null);
+
+  // outside click handler
+  useOutsideClick(ref, () => setToggle(false));
 
   function handleToggle(e) {
+    e.stopPropagation();
     setToggle((toggle) => !toggle);
   }
   function handleShowSettings(e) {
@@ -57,7 +63,10 @@ export function Profile() {
           <ListDownIcon size={12} />
         </div>
         {toggle && (
-          <div className="toggle__menu absolute top-full left-0 z-50 w-full bg-white shadow-sm shadow-stone-400 p-2 mt-2 rounded-md ">
+          <div
+            ref={ref}
+            className="toggle__menu absolute top-full left-0 z-50 w-full bg-white shadow-sm shadow-stone-400 p-2 mt-2 rounded-md "
+          >
             <ul>
               <li className={profilteStyles.li} onClick={handleShowSettings}>
                 <span>
