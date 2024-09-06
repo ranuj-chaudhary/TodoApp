@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
 
 // helper functions
 import { findTotalTaskByList } from '../utils/helper';
@@ -14,7 +13,7 @@ const withToggleStyle = {
     'flex items-center gap-2 bg-white bg-opacity-70   p-2  rounded-md m-2 shadow-md ',
 };
 export default function RenderWithToggle({ ComponentToRender, listName }) {
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(true);
   const { todos } = useSelector((state) => state.todo);
 
   let totalTask = findTotalTaskByList(listName, todos);

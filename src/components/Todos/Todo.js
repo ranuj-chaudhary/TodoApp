@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
-import { AiFillStar } from 'react-icons/ai';
 import { completeTask, deleteTodo } from '../../reducers/reducers';
 import { getCurrentDateTime } from '../../utils/helper';
 import { updateUrgentTask } from '../../reducers/reducers';
-import { AiTwotoneDelete } from 'react-icons/ai';
-import { AiFillDelete } from 'react-icons/ai';
+
+//icons
+import { StarIcon, DeleteIcon } from '../../icons/icons';
 
 export const Todo = ({ todo }) => {
   const dispatch = useDispatch();
@@ -52,17 +52,20 @@ export const Todo = ({ todo }) => {
         </span>
       </div>
       <div className="important_task cursor-pointer flex items-center pl-2">
-        <AiFillStar
+        <StarIcon
           color={`${urgentTask ? '#333333' : '#999999'}`}
           size={20}
           onClick={() => handleUrgentStar(id)}
         />
       </div>
       <div className="important_task cursor-pointer flex items-center pl-2">
-        <AiFillDelete
+        <DeleteIcon
           color={'#333333'}
           size={20}
-          onClick={() => handleDelete(id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleDelete(id);
+          }}
         />
       </div>
     </li>

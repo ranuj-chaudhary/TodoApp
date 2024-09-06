@@ -2,9 +2,13 @@ import { useSelector } from 'react-redux';
 import { Todo } from '../Todos/Todo';
 import { filterData } from '../../utils/helper';
 import { useMemo } from 'react';
+import { useLocation } from 'react-router';
 
-export function CompletedTasks() {
+export function CustomCompleteTask() {
   const { todos, sortBy } = useSelector((state) => state.todo);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const listType = queryParams.get('type');
 
   // SORT BY SLECTED DATA
   const sortedData = useMemo(() => filterData(todos, sortBy), [todos, sortBy]);
@@ -12,6 +16,12 @@ export function CompletedTasks() {
   // FILTER BY COMPLETED TASKS
   let completedTasks = sortedData.filter((task) => task.taskCompleted === true);
 
+  // IF QUERY PARAM TYPE EXIST FILTER DATA BY LIST TYPE
+  if (listType?.length > 0) {
+    completedTasks = completedTasks.filter(
+      (task) => task.category === listType
+    );
+  }
   return (
     <ul className="complete_task flex flex-col gap-4 p-4">
       {completedTasks &&
