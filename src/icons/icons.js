@@ -1,4 +1,10 @@
-import { AiFillSun, AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
+import {
+  AiFillDelete,
+  AiFillStar,
+  AiFillSun,
+  AiOutlineDown,
+  AiOutlineUp,
+} from 'react-icons/ai';
 import { AiOutlineSun } from 'react-icons/ai';
 import { AiTwotoneStar } from 'react-icons/ai';
 import { AiOutlineStar } from 'react-icons/ai';
@@ -10,6 +16,7 @@ import { AiOutlineUnorderedList } from 'react-icons/ai';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { AiOutlineSetting } from 'react-icons/ai';
 import { AiOutlineLogout } from 'react-icons/ai';
+
 // Sun
 export function SunFillIcon(props) {
   return <AiFillSun {...props} />;
@@ -19,12 +26,6 @@ export function SunIcon(props) {
   return <AiOutlineSun {...props} />;
 }
 
-// star
-
-// (two outline)
-export function StarFillIcon(props) {
-  return <AiTwotoneStar {...props} />;
-}
 // (single outline)
 export function StarLineIcon(props) {
   return <AiOutlineStar {...props} />;
@@ -77,3 +78,25 @@ export function SettingIcon(props) {
 export function LogoutIcon(props) {
   return <AiOutlineLogout {...props} />;
 }
+
+// star
+// (two outline)
+export function StarFillIcon(props) {
+  return <AiTwotoneStar {...props} />;
+}
+
+// (fill icon)
+export function StarIcon(props) {
+  return <AiFillStar {...props} />;
+}
+
+// deleteicon
+export function DeleteIcon(props) {
+  return (
+    <AiFillDelete
+      {...props}
+    />
+  );
+}
+
+

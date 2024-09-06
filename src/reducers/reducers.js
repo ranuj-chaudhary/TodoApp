@@ -17,6 +17,7 @@ const actiontypes = {
   SORT_TODO: 'SORT_TODO',
   URGENT_TASK: 'URGENT_TASK',
   ADD_CUSTOMLIST: 'ADD_CUSTOMLIST',
+  DELETE_CUSTOMLIST: 'DELETE_CUSTOMLIST',
 };
 
 const initialState = {
@@ -32,7 +33,7 @@ const initialState = {
       urgentTask: false,
       private: false,
       dueDate: '2024-08-31T15:28:43+05:30',
-      category: 'task',
+      category: 'task'
     },
     {
       id: '2',
@@ -98,36 +99,34 @@ const initialState = {
       name: 'My day',
       icon: <SunIcon className="text-blue-300" />,
       url: 'myday',
-      id: 1,
+      id: '1',
       listKey: 'TotalTodayTask',
     },
     {
       name: 'Important',
       icon: <StarLineIcon className="text-pink-500" />,
       url: 'important',
-      id: 2,
+      id: '2',
       listKey: 'Important',
     },
     {
       name: 'Task',
       icon: <HomeIcon className="text-pink-500" />,
       url: 'tasks',
-      id: 4,
+      id: '4',
       listKey: 'TotalTask',
     },
   ],
   customList: [
     {
       name: 'javascript',
-      icon: <UnorderedListIcon className="text-blue-300" />,
       url: 'customlist',
-      id: 1232,
+      id: '1232',
     },
     {
       name: 'react',
-      icon: <UnorderedListIcon className="text-blue-300" />,
       url: 'customlist',
-      id: 12,
+      id: '12',
     },
   ],
 };
@@ -195,6 +194,13 @@ function todoReducer(state = initialState, action) {
       return {
         ...state,
         customList: [...state.customList, action.payload.list],
+      };
+    case actiontypes.DELETE_CUSTOMLIST:
+      return {
+        ...state,
+        customList: [
+          ...state.customList.filter((list) => list.id !== action.payload.id),
+        ],
       };
     default:
       return {
@@ -267,10 +273,9 @@ export const addCustomList = function (listName) {
   if (listName.length === 0) {
     listName = 'untitled list';
   }
-
+console.log(listName)
   const newList = {
     name: listName.toLowerCase(),
-    icon: <UnorderedListIcon className="text-blue-300" />,
     url: 'customlist',
     id,
   };
@@ -278,6 +283,12 @@ export const addCustomList = function (listName) {
   return {
     type: actiontypes.ADD_CUSTOMLIST,
     payload: { list: newList },
+  };
+};
+export const deleteCustomList = function (id) {
+  return {
+    type: actiontypes.DELETE_CUSTOMLIST,
+    payload: { id },
   };
 };
 

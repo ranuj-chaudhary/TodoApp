@@ -1,13 +1,26 @@
-import { getCurrentDate } from '../../utils/helper';
-import { AiFillHome } from 'react-icons/ai';
-
 import { TodoTheme } from './TodoTheme';
 import { TodoSort } from './TodoSort';
 import { useTheme } from '../../context/useThemeContext';
+import { useLocation } from 'react-router';
+import { useSelector } from 'react-redux';
+import {
+  HomeIcon,
+  StarLineIcon,
+  SunIcon,
+  UnorderedListIcon,
+} from '../../icons/icons';
+import { removeSpaceFromString } from '../../utils/helper';
 
 const headerStyle = {
   header:
     'pt-8 pb-4 pl-6 pr-12 text-black flex justify-between sticky top-0 z-50',
+};
+
+const icons = {
+  myday: <SunIcon className="text-black" size={24} />,
+  important: <StarLineIcon className="text-black" size={24} />,
+  task: <HomeIcon className="text-black" size={24} />,
+  customlist: <UnorderedListIcon className="text-black" size={24} />,
 };
 
 export function TodoHeader() {
@@ -24,16 +37,15 @@ export function TodoHeader() {
 }
 
 function TodoHeading() {
-  const date = getCurrentDate();
-
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const listType = queryParams.get('type');
+  const listName = removeSpaceFromString(listType.toLowerCase());
   return (
-    <div className="presentDate flex gap-4 font-bold">
-      <button>
-        <AiFillHome size={24} />
-      </button>
+    <div className="presentDate flex gap-2 font-bold items-center">
+      <button>{icons[listName] ? icons[listName] : icons.customlist}</button>
       <div>
-        <h1>My Day</h1>
-        <p>{date}</p>
+        <h1 className="text-lg capitalize">{listType}</h1>
       </div>
     </div>
   );

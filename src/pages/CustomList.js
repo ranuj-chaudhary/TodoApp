@@ -1,14 +1,17 @@
-import { CompletedTasks, IncompleteTasks } from '../components/Tasks';
+import { CustomCompleteTask, CustomIncompleteTask } from '../components/Tasks';
 import RenderWithToggle from '../shared/withToggle';
 
 export function CustomList() {
   return (
     <div className="My day">
       <RenderWithToggle
-        ComponentToRender={IncompleteTasks}
+        ComponentToRender={CustomIncompleteTask}
         listName={'Pending'}
       />
-      <RenderWithToggle ComponentToRender={CompletedTasks} listName={'Done'} />
+      <RenderWithToggle
+        ComponentToRender={CustomCompleteTask}
+        listName={'Done'}
+      />
     </div>
   );
 }
