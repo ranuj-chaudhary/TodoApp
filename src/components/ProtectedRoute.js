@@ -5,11 +5,11 @@ import { useAuth } from '../context/AuthContext';
 export default function ProtectedRoute({ children }) {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
-
   useEffect(
     function () {
       if (!isAuthenticated) {
         navigate('/');
+        console.log(isAuthenticated);
       }
     },
     [isAuthenticated, navigate]

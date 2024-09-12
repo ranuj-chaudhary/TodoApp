@@ -2,7 +2,7 @@ import { TodoTheme } from './TodoTheme';
 import { TodoSort } from './TodoSort';
 import { useTheme } from '../../context/useThemeContext';
 import { useLocation } from 'react-router';
-import { useSelector } from 'react-redux';
+
 import {
   HomeIcon,
   StarLineIcon,

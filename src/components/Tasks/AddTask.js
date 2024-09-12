@@ -11,7 +11,7 @@ const addTaskStyle = {
     'ml-4 bg-blue-400 p-2 border font-bold text-white rounded-md hover:bg-blue-500',
   input:
     ' border-black rounded-md pl-10 flex-grow py-4 shadow-md focus:outline-blue-300 focus:border-b-[1px] focus:border-blue',
-  section: 'absolute pt-4 pb-4  right-0 bottom-0 w-4/5 bg-transparent',
+  section: 'absolute pt-4 pb-4  right-0 bottom-0 w-4/5 h-1/5 bg-transparent',
 };
 
 export const AddTask = () => {
