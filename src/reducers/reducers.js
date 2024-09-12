@@ -7,6 +7,7 @@ import {
   HomeIcon,
   UnorderedListIcon,
 } from '../icons/icons';
+import { SiNamebase } from 'react-icons/si';
 // ACTION TYPES
 
 const actiontypes = {
@@ -33,7 +34,7 @@ const initialState = {
       urgentTask: false,
       private: false,
       dueDate: '2024-08-31T15:28:43+05:30',
-      category: 'task'
+      category: 'task',
     },
     {
       id: '2',
@@ -201,6 +202,11 @@ function todoReducer(state = initialState, action) {
         customList: [
           ...state.customList.filter((list) => list.id !== action.payload.id),
         ],
+        todos: [
+          ...state.todos.filter(
+            (list) => list.category !== action.payload.name
+          ),
+        ],
       };
     default:
       return {
@@ -273,22 +279,21 @@ export const addCustomList = function (listName) {
   if (listName.length === 0) {
     listName = 'untitled list';
   }
-console.log(listName)
+
   const newList = {
     name: listName.toLowerCase(),
     url: 'customlist',
     id,
   };
-  console.log(newList);
   return {
     type: actiontypes.ADD_CUSTOMLIST,
     payload: { list: newList },
   };
 };
-export const deleteCustomList = function (id) {
+export const deleteCustomList = function (id, listName) {
   return {
     type: actiontypes.DELETE_CUSTOMLIST,
-    payload: { id },
+    payload: { id, listName },
   };
 };
 

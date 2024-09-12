@@ -20,7 +20,7 @@ export function CustomListItem({ list, onSelectid, selectedId, listStyle }) {
   const type = removeSpaceFromString(name);
 
   function handleListDelete(id) {
-    dispatch(deleteCustomList(id));
+    dispatch(deleteCustomList(id, name));
   }
   return (
     <Link to={`${url}?type=${type}`}>
