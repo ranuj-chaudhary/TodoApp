@@ -16,7 +16,7 @@ const addTaskStyle = {
 
 export const AddTask = () => {
   const dispatch = useDispatch();
-  const { error, customList } = useSelector((state) => state.todo);
+  const { error } = useSelector((state) => state.todo);
   const [taskTodo, setTaskTodo] = useState('');
   const [listType, setListType] = useState('');
 
@@ -26,7 +26,11 @@ export const AddTask = () => {
   // component specific state
 
   function handleTaskTodoChange(e) {
-    setTaskTodo(e.target.value);
+    let query = e.target.value;
+    if (query.length > 120) {
+      query = query.slice(0, 120) + '...';
+    }
+    setTaskTodo(query);
   }
 
   function handleOnKeyUp(event) {

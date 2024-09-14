@@ -3,14 +3,14 @@ import RenderWithToggle from '../shared/withToggle';
 
 export function CustomList() {
   return (
-    <div className="My day">
+    <div className="custom-list">
       <RenderWithToggle
         ComponentToRender={CustomIncompleteTask}
-        listName={'Pending'}
+        toggleName={'Pending'}
       />
       <RenderWithToggle
         ComponentToRender={CustomCompleteTask}
-        listName={'Done'}
+        toggleName={'Done'}
       />
     </div>
   );

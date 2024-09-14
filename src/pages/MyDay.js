@@ -6,11 +6,11 @@ export function MyDay() {
     <div className="My day">
       <RenderWithToggle
         ComponentToRender={TodayIncompleteTasks}
-        listName={'Incompleted'}
+        toggleName={'Incompleted'}
       />
       <RenderWithToggle
         ComponentToRender={TodayCompletedTasks}
-        listName={'Completed'}
+        toggleName={'Completed'}
       />
     </div>
   );

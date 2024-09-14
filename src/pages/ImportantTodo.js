@@ -6,7 +6,7 @@ export function ImportantTodo() {
     <div className="My day">
       <RenderWithToggle
         ComponentToRender={ImportantTask}
-        listName={'Important'}
+        toggleName={'Important'}
       />
     </div>
   );

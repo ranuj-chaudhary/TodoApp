@@ -6,17 +6,23 @@ import { findTotalTaskByList } from '../utils/helper';
 
 // icons
 import { ListDownIcon, ListUpIcon } from '../icons/icons';
+import { useLocation } from 'react-router';
 
 // styles
 const withToggleStyle = {
   button:
     'flex items-center gap-2 bg-white bg-opacity-70   p-2  rounded-md m-2 shadow-md ',
 };
-export default function RenderWithToggle({ ComponentToRender, listName }) {
+export default function RenderWithToggle({ ComponentToRender, toggleName }) {
   const [toggle, setToggle] = useState(true);
   const { todos } = useSelector((state) => state.todo);
 
-  let totalTask = findTotalTaskByList(listName, todos);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const listType = queryParams.get('type');
+
+  // get total by listname
+  let totalTask = findTotalTaskByList(toggleName, todos, listType);
 
   function handleToggle() {
     setToggle((toggle) => !toggle);
@@ -31,7 +37,8 @@ export default function RenderWithToggle({ ComponentToRender, listName }) {
             toggle ? ' border-[2px] border-blue-400 bg-opacity-100' : ''
           }`}
         >
-          <span>{listName}</span> {totalTask > 0 && <span>({totalTask})</span>}
+          <span>{toggleName}</span>{' '}
+          {totalTask > 0 && <span>({totalTask})</span>}
           {toggle ? <ListUpIcon /> : <ListDownIcon />}
         </button>
       </div>
