@@ -8,6 +8,9 @@ import { removeSpaceFromString } from '../../utils/helper';
 //icons
 import { DeleteIcon, UnorderedListIcon } from '../../icons/icons';
 
+// reusable component
+import { NotificationBubble } from './NotificationBubble';
+
 export function CustomListItem({ list, onSelectid, selectedId, listStyle }) {
   // global state
   const { todos } = useSelector((state) => state.todo);
@@ -16,7 +19,7 @@ export function CustomListItem({ list, onSelectid, selectedId, listStyle }) {
   const { name, id, url } = list;
 
   // derived values
-  const totalTask = findTotalTaskByList(name, todos);
+  const totalTask = findTotalTaskByList('CustomList', todos, name);
   const type = removeSpaceFromString(name);
 
   function handleListDelete(id) {
@@ -30,7 +33,7 @@ export function CustomListItem({ list, onSelectid, selectedId, listStyle }) {
         }`}
         onClick={() => onSelectid(id)}
       >
-        <div className="flex gap-3 items-center w-full">
+        <div className="flex gap-3 items-center w-full ">
           <UnorderedListIcon className="text-blue-300" />
           <span className="flex-grow flex justify-between">
             <span className="capitalize">{name}</span>
@@ -44,9 +47,13 @@ export function CustomListItem({ list, onSelectid, selectedId, listStyle }) {
           </span>
         </div>
         <div>
-          <span>{totalTask !== 0 ? totalTask : ''}</span>
+          <NotificationBubble
+            totalTask={totalTask}
+            backgroundColor="bg-red-200"
+          />
         </div>
       </li>
     </Link>
   );
 }
+

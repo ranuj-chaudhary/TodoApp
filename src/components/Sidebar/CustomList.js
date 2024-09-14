@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CustomListItem } from './CustomListItem';
 import { PlusIcon } from '../../icons/icons';
 import { addCustomList } from '../../reducers/reducers';
+
+// styles
 const customListStyle = {
   list: 'mb-2 flex items-center justify-between p-[6px] hover:bg-gray-100 active:scale-95 transition-colors transition-transform duration-300 cursor-pointer ',
 };

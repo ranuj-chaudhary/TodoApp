@@ -6,11 +6,11 @@ export function TasksTodo() {
     <div className="My day">
       <RenderWithToggle
         ComponentToRender={IncompleteTasks}
-        listName={'Pending'}
+        toggleName={'Pending'}
       />
       <RenderWithToggle
         ComponentToRender={CompletedTasks}
-        listName={'Done'}
+        toggleName={'Done'}
       />
     </div>
   );

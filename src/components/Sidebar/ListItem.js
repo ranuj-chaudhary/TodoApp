@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { findTotalTaskByList } from '../../utils/helper';
-
+import { NotificationBubble } from './NotificationBubble';
 export function ListItem({ list, onSelectid, selectedId, listStyle }) {
   const { name, id, icon, url } = list;
   const { todos } = useSelector((state) => state.todo);
@@ -18,9 +18,7 @@ export function ListItem({ list, onSelectid, selectedId, listStyle }) {
         <div className="flex gap-3 items-center">
           {icon} <span className="capitalize">{name}</span>
         </div>
-        <div>
-          <span>{totalTask !== 0 ? totalTask : ''}</span>
-        </div>
+        <NotificationBubble totalTask={totalTask} backgroundColor='bg-blue-200'/>
       </li>
     </Link>
   );

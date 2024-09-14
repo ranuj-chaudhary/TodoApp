@@ -57,18 +57,18 @@ export function filterData(todos, sortBy = '') {
   return filteredData;
 }
 
-export function findTotalTaskByList(list, todos) {
+export function findTotalTaskByList(list, todos, listCategory) {
   let totalTask = 0;
   switch (list) {
     case 'Done':
-      const totalCompleteTasks = todos.filter(
-        (item) => item.taskCompleted === true
-      );
+      const totalCompleteTasks = todos.filter((item) => {
+        return item.taskCompleted === true && item.category === listCategory;
+      });
       return totalCompleteTasks.length;
     case 'Pending':
-      const totalIncompleteTasks = todos.filter(
-        (item) => item.taskCompleted === false
-      );
+      const totalIncompleteTasks = todos.filter((item) => {
+        return item.taskCompleted === false && item.category === listCategory;
+      });
       return totalIncompleteTasks.length;
     case 'Important':
       const totalImportantTasks = todos.filter(
@@ -91,6 +91,9 @@ export function findTotalTaskByList(list, todos) {
       return mydayCompletedTasks.length + mydayIncompletedTasks.length;
     case 'Task':
       return todos.length;
+    case 'CustomList':
+      const customListLength = totalCustomList(listCategory, todos);
+      return customListLength;
     default:
       return totalTask;
   }
@@ -122,4 +125,9 @@ export function filteredIncompletedTodayTasks(data) {
 
 export function removeSpaceFromString(stringName) {
   return stringName.replace(' ', '');
+}
+
+export function totalCustomList(listCategory, todos) {
+  const customList = todos.filter((todo) => todo.category === listCategory);
+  return customList.length;
 }
