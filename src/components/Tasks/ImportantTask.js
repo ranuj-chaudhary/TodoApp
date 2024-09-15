@@ -1,9 +1,17 @@
 import { useSelector } from 'react-redux';
-import { Todo } from '../Todos/Todo';
-import { filterData } from '../../utils/helper';
 import { useMemo } from 'react';
 
-export function ImportantTask() {
+// COMPONENTS
+import { Todo } from '../Todos/Todo';
+
+// SHARED COMPONENTS
+import { withToggle } from '../../shared/withToggle';
+
+// HELPERS
+import { filterData } from '../../utils/helper';
+
+function ImportantTask() {
+  // GLOBAL STATE
   const { todos, sortBy } = useSelector((state) => state.todo);
 
   // DERIVED VALUE
@@ -20,3 +28,4 @@ export function ImportantTask() {
     </ul>
   );
 }
+export default withToggle(ImportantTask);

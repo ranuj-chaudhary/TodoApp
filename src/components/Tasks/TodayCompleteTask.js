@@ -1,14 +1,25 @@
-import { useSelector } from 'react-redux';
-import { Todo } from '../Todos/Todo';
-import {
-  filterData,
-  filteredCompletedTodayTasks,
-} from '../../utils/helper';
 import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
-export function TodayCompletedTasks() {
+// COMPONENTS
+import { Todo } from '../Todos/Todo';
+
+// SHARED COMPONENT (HOC)
+import { withToggle } from '../../shared/withToggle';
+
+// HELPERS
+import {
+filterData,
+filteredCompletedTodayTasks,
+} from '../../utils/helper';
+
+// REACT COMPONENT
+
+function TodayCompletedTasks() {
+  // GLOBAL STATE
   const { todos, sortBy } = useSelector((state) => state.todo);
-  // DERIVED VALUE
+
+  // SORT DATE BY SELECTED SORT TYPE
   const sortedData = useMemo(() => filterData(todos, sortBy), [todos, sortBy]);
 
   // FILTER TODAY TASKS
@@ -22,3 +33,4 @@ export function TodayCompletedTasks() {
     </ul>
   );
 }
+export default withToggle(TodayCompletedTasks)

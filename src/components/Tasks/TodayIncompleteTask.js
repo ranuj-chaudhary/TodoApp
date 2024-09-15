@@ -1,12 +1,23 @@
-import { useSelector } from 'react-redux';
-import { Todo } from '../Todos/Todo';
-import { filterData, filteredIncompletedTodayTasks } from '../../utils/helper';
 import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
-export function TodayIncompleteTasks() {
+// COMPONENTS
+import { Todo } from '../Todos/Todo';
+
+// SHARED COMPONENTS
+import { withToggle } from '../../shared/withToggle';
+
+// HELPERS
+import { filterData, filteredIncompletedTodayTasks } from '../../utils/helper';
+
+function TodayIncompleteTasks() {
+  // GLOBAL STATE
   const { todos, sortBy } = useSelector((state) => state.todo);
+
+  // SORT DATE BY SELECTE SORT TYPE
   const sortedData = useMemo(() => filterData(todos, sortBy), [todos, sortBy]);
 
+  // FITLER DATA BY INCOMPLETE TASKS
   const todayIncompletedTasks = filteredIncompletedTodayTasks(sortedData);
 
   return (
@@ -17,3 +28,5 @@ export function TodayIncompleteTasks() {
     </ul>
   );
 }
+
+export default withToggle(TodayIncompleteTasks);

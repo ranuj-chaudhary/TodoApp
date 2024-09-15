@@ -1,15 +1,21 @@
-import { useSelector } from 'react-redux';
-import { Todo } from '../Todos/Todo';
-import { filterData } from '../../utils/helper';
 import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+
+// COMPONENTS
+import { Todo } from '../Todos/Todo';
+
+// HELPERS
+import { filterData } from '../../utils/helper';
 
 export function TotalTask() {
+
+  // GLOBAL STATE
   const { todos, sortBy } = useSelector((state) => state.todo);
 
   // DERIVED VALUE
   const sortedData = useMemo(() => filterData(todos, sortBy), [todos, sortBy]);
 
-  // FILTER TASKS
+  // FILTER TASKS BY IMPORTANT
   const urgentTask = sortedData.filter((task) => task.urgentTask === true);
 
   return (

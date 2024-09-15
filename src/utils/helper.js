@@ -61,15 +61,15 @@ export function findTotalTaskByList(list, todos, listCategory) {
   let totalTask = 0;
   switch (list) {
     case 'Done':
-      const totalCompleteTasks = todos.filter((item) => {
+      const totalCompleteTasksByCategory = todos.filter((item) => {
         return item.taskCompleted === true && item.category === listCategory;
       });
-      return totalCompleteTasks.length;
+      return totalCompleteTasksByCategory.length;
     case 'Pending':
-      const totalIncompleteTasks = todos.filter((item) => {
+      const totalIncompleteTasksByCategory = todos.filter((item) => {
         return item.taskCompleted === false && item.category === listCategory;
       });
-      return totalIncompleteTasks.length;
+      return totalIncompleteTasksByCategory.length;
     case 'Important':
       const totalImportantTasks = todos.filter(
         (item) => item.urgentTask === true
