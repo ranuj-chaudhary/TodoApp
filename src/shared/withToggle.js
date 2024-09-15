@@ -1,29 +1,17 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 
-// helper functions
-import { findTotalTaskByList } from '../utils/helper';
-
-// icons
+// ICONS
 import { ListDownIcon, ListUpIcon } from '../icons/icons';
-import { useLocation } from 'react-router';
 
-// styles
+// STYLES
 const withToggleStyle = {
   button:
     'flex items-center gap-2 bg-white bg-opacity-70   p-2  rounded-md m-2 shadow-md ',
 };
+
 export const withToggle = (ComponentToRender) => {
   function WithToggle(props) {
     const [toggle, setToggle] = useState(true);
-    const { todos } = useSelector((state) => state.todo);
-
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const listType = queryParams.get('type');
-
-    // get total by listname
-    let totalTask = findTotalTaskByList(props.toggleName, todos, listType);
 
     function handleToggle() {
       setToggle((toggle) => !toggle);
@@ -38,16 +26,17 @@ export const withToggle = (ComponentToRender) => {
               toggle ? ' border-[2px] border-blue-400 bg-opacity-100' : ''
             }`}
           >
-            <span>{props.toggleName}</span>{' '}
-            {totalTask > 0 && <span>({totalTask})</span>}
+            <span>{props.toggleName}</span>
             {toggle ? <ListUpIcon /> : <ListDownIcon />}
           </button>
         </div>
 
-        <div className="list__container">{toggle && <ComponentToRender {...props} />}</div>
+        <div className="list__container">
+          {toggle && <ComponentToRender {...props} />}
+        </div>
       </div>
     );
   }
 
   return WithToggle;
-}
+};

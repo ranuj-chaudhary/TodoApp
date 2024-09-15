@@ -11,7 +11,7 @@ const initialState = {
     {
       id: 0,
       color: 'Poppy',
-      style: 'bg-gradient-to-r from-rose-400 to-red-500',
+      style: 'bg-gradient-to-r from-rose-100 to-red-300',
     },
     {
       id: 1,

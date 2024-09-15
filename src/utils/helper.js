@@ -60,31 +60,11 @@ export function filterData(todos, sortBy = '') {
 export function findTotalTaskByList(list, todos, listCategory) {
   let totalTask = 0;
   switch (list) {
-    case 'Done':
-      const totalCompleteTasksByCategory = todos.filter((item) => {
-        return item.taskCompleted === true && item.category === listCategory;
-      });
-      return totalCompleteTasksByCategory.length;
-    case 'Pending':
-      const totalIncompleteTasksByCategory = todos.filter((item) => {
-        return item.taskCompleted === false && item.category === listCategory;
-      });
-      return totalIncompleteTasksByCategory.length;
     case 'Important':
       const totalImportantTasks = todos.filter(
         (item) => item.urgentTask === true
       );
       return totalImportantTasks.length;
-    case 'Completed':
-      const TotalTodayCompletedTasks = filteredCompletedTodayTasks(todos);
-      return TotalTodayCompletedTasks.length;
-    case 'Incompleted':
-      const TotalTodayIncompletedTasks = filteredIncompletedTodayTasks(todos);
-      return TotalTodayIncompletedTasks.length;
-    case 'TotalTask':
-      const todayCompletedTasks = filteredCompletedTodayTasks(todos);
-      const todayIncompletedTasks = filteredIncompletedTodayTasks(todos);
-      return todayCompletedTasks.length + todayIncompletedTasks.length;
     case 'My day':
       const mydayCompletedTasks = filteredCompletedTodayTasks(todos);
       const mydayIncompletedTasks = filteredIncompletedTodayTasks(todos);
