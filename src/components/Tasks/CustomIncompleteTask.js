@@ -1,25 +1,34 @@
 import { useSelector } from 'react-redux';
-import { Todo } from '../Todos/Todo';
-import { filterData } from '../../utils/helper';
-import { useLocation } from 'react-router';
 
-export function CustomIncompleteTask() {
+// COMPONENTS
+import { Todo } from '../Todos/Todo';
+
+// SHARED CONPONENTS
+import { withToggle } from '../../shared/withToggle';
+
+// CUSTOM HOOKS
+import { useQueryParams } from '../../hooks/useQueryParams';
+
+// HELPERS
+import { filterData } from '../../utils/helper';
+
+function CustomIncompleteTask() {
   const { todos, sortBy } = useSelector((state) => state.todo);
   const sortedData = filterData(todos, sortBy);
 
-  // filter by list type by query pramas
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const listType = queryParams.get('type');
+  // GET CURRENT LIST TYPE FROM QUERY PAPRAMS
+  const [listType] = useQueryParams();
 
-  // filter by incomplete task
+  // FILTER BY INCOMPLETE TASK
   let incomleteTasks = sortedData.filter(
     (task) => task.taskCompleted === false
   );
 
   // IF QUERY PARAM TYPE EXIST FILTER DATA BY LIST TYPE
   if (listType?.length > 0) {
-    incomleteTasks = incomleteTasks.filter((task) => task.category === listType);
+    incomleteTasks = incomleteTasks.filter(
+      (task) => task.category === listType
+    );
   }
 
   return (
@@ -30,3 +39,5 @@ export function CustomIncompleteTask() {
     </ul>
   );
 }
+
+export default withToggle(CustomIncompleteTask);

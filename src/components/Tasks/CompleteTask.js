@@ -1,9 +1,16 @@
-import { useSelector } from 'react-redux';
-import { Todo } from '../Todos/Todo';
-import { filterData } from '../../utils/helper';
 import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
-export function CompletedTasks() {
+// COMPONENTS
+import { Todo } from '../Todos/Todo';
+
+// SHARED COMPONENT
+import { withToggle } from '../../shared/withToggle';
+
+// HELPERS
+import { filterData } from '../../utils/helper';
+
+function CompletedTasks() {
   const { todos, sortBy } = useSelector((state) => state.todo);
 
   // SORT BY SLECTED DATA
@@ -20,3 +27,5 @@ export function CompletedTasks() {
     </ul>
   );
 }
+
+export default withToggle(CompletedTasks);

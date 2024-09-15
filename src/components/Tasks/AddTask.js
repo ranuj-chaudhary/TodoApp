@@ -1,11 +1,16 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { addTodo, errorMessage } from '../../reducers/reducers';
+// THEME CONTEXT
 import { useTheme } from '../../context/useThemeContext';
-import { AiOutlinePlus } from 'react-icons/ai';
-import { removeSpaceFromString } from '../../utils/helper';
 
+// ICONS
+import { AiOutlinePlus } from 'react-icons/ai';
+
+// HELPERS
+import { removeSpaceFromString } from '../../utils/helper';
+import { useAddTask } from '../../hooks/useAddTask';
+
+// STYLES
 const addTaskStyle = {
   button:
     'ml-4 bg-blue-400 p-2 border font-bold text-white rounded-md hover:bg-blue-500',
@@ -15,37 +20,20 @@ const addTaskStyle = {
 };
 
 export const AddTask = () => {
-  const dispatch = useDispatch();
+  // GLOBAL STATE
   const { error } = useSelector((state) => state.todo);
-  const [taskTodo, setTaskTodo] = useState('');
-  const [listType, setListType] = useState('');
 
-  // theme context hook
+  // CUSTOM HOOK ADD TASK
+  const [
+    taskTodo,
+    listType,
+    handleTaskTodoChange,
+    handleOnKeyUp,
+    handleSelectListType,
+  ] = useAddTask();
+
+  // THEME COTEXT HOOK (GET CURRENT THEME SELECTED BY USER)
   const { currentTheme } = useTheme();
-
-  // component specific state
-
-  function handleTaskTodoChange(e) {
-    let query = e.target.value;
-    if (query.length > 120) {
-      query = query.slice(0, 120) + '...';
-    }
-    setTaskTodo(query);
-  }
-
-  function handleOnKeyUp(event) {
-    if (event.key === 'Enter') {
-      if (taskTodo.length > 0) {
-        dispatch(addTodo(taskTodo, listType));
-        dispatch(errorMessage(''));
-        setTaskTodo('');
-      }
-    }
-  }
-
-  function handleSelectListType(e) {
-    setListType(e.target.value);
-  }
 
   return (
     <div className={`${addTaskStyle.section} ${currentTheme.style} `}>

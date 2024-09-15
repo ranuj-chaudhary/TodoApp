@@ -1,16 +1,24 @@
 import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
+
+// COMPONENTS
 import { Todo } from '../Todos/Todo';
 import { filterData } from '../../utils/helper';
-import { useMemo } from 'react';
-import { useLocation } from 'react-router';
 
-export function CustomCompleteTask() {
+// SHARED COMPONENTS
+import { withToggle } from '../../shared/withToggle';
+
+// CUSTOM HOOKS
+import { useQueryParams } from '../../hooks/useQueryParams';
+
+function CustomCompleteTask() {
+  // REDUX STORE
   const { todos, sortBy } = useSelector((state) => state.todo);
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const listType = queryParams.get('type');
 
-  // SORT BY SLECTED DATA
+  // GET CURRENT LIST TYPE FROM QUERY PARAMS
+  const [listType] = useQueryParams();
+
+  // SORT BY SELECTED DATA
   const sortedData = useMemo(() => filterData(todos, sortBy), [todos, sortBy]);
 
   // FILTER BY COMPLETED TASKS
@@ -22,6 +30,7 @@ export function CustomCompleteTask() {
       (task) => task.category === listType
     );
   }
+
   return (
     <ul className="complete_task flex flex-col gap-4 p-4">
       {completedTasks &&
@@ -30,3 +39,5 @@ export function CustomCompleteTask() {
     </ul>
   );
 }
+
+export default withToggle(CustomCompleteTask);
