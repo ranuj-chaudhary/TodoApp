@@ -12,6 +12,7 @@ import {
 filterData,
 filteredCompletedTodayTasks,
 } from '../../utils/helper';
+import RegularList from '../../shared/RegularList';
 
 // REACT COMPONENT
 
@@ -26,11 +27,9 @@ function TodayCompletedTasks() {
   const todayCompletedTasks = filteredCompletedTodayTasks(sortedData);
 
   return (
-    <ul className="complete_task flex flex-col gap-4 p-4">
-      {todayCompletedTasks &&
-        todayCompletedTasks.length > 0 &&
-        todayCompletedTasks.map((task) => <Todo todo={task} key={task.id} />)}
-    </ul>
+    <RegularList tasks={todayCompletedTasks} todo={Todo} />
   );
+
+
 }
 export default withToggle(TodayCompletedTasks)
