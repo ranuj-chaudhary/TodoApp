@@ -10,6 +10,7 @@ import { withToggle } from '../../shared/withToggle';
 
 // CUSTOM HOOKS
 import { useQueryParams } from '../../hooks/useQueryParams';
+import RegularList from '../../shared/RegularList';
 
 function CustomCompleteTask() {
   // REDUX STORE
@@ -32,11 +33,7 @@ function CustomCompleteTask() {
   }
 
   return (
-    <ul className="complete_task flex flex-col gap-4 p-4">
-      {completedTasks &&
-        completedTasks.length > 0 &&
-        completedTasks.map((task) => <Todo todo={task} key={task.id} />)}
-    </ul>
+    <RegularList tasks={completedTasks} todo={Todo} />
   );
 }
 

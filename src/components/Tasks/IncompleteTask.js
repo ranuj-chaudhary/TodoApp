@@ -8,6 +8,7 @@ import { withToggle } from '../../shared/withToggle';
 
 // HELPERS
 import { filterData } from '../../utils/helper';
+import RegularList from '../../shared/RegularList';
 
 function IncompleteTasks() {
   // GLOBAL STATE
@@ -22,11 +23,7 @@ function IncompleteTasks() {
   );
 
   return (
-    <ul className="incomplete_task flex flex-col gap-4 p-4">
-      {todos &&
-        todos.length > 0 &&
-        incomleteTasks.map((task) => <Todo todo={task} key={task.id} />)}
-    </ul>
+    <RegularList tasks={incomleteTasks} todo={Todo} />
   );
 }
 

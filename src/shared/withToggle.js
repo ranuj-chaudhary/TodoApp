@@ -6,12 +6,12 @@ import { ListDownIcon, ListUpIcon } from '../icons/icons';
 // STYLES
 const withToggleStyle = {
   button:
-    'flex items-center gap-2 bg-white bg-opacity-70   p-2  rounded-md m-2 shadow-md ',
+    'flex items-center gap-2 bg-white bg-opacity-70  border-[2px]  hover:bg-white p-2  rounded-md m-2 shadow-md ',
 };
 
 export const withToggle = (ComponentToRender) => {
   function WithToggle(props) {
-    const [toggle, setToggle] = useState(true);
+    const [toggle, setToggle] = useState(false);
 
     function handleToggle() {
       setToggle((toggle) => !toggle);
@@ -19,21 +19,21 @@ export const withToggle = (ComponentToRender) => {
 
     return (
       <div>
-        <div className="">
-          <button
-            onClick={handleToggle}
-            className={`${withToggleStyle.button} ${
-              toggle ? ' border-[2px] border-blue-400 bg-opacity-100' : ''
-            }`}
-          >
-            <span>{props.toggleName}</span>
-            {toggle ? <ListUpIcon /> : <ListDownIcon />}
-          </button>
-        </div>
+        <button
+          onClick={handleToggle}
+          className={`${withToggleStyle.button} ${
+            toggle ? '  border-blue-400 bg-opacity-100' : 'border-transparent'
+          } `}
+        >
+          <span>{props.toggleName}</span>
+          {toggle ? <ListUpIcon /> : <ListDownIcon />}
+        </button>
 
-        <div className="list__container">
-          {toggle && <ComponentToRender {...props} />}
-        </div>
+        {toggle && (
+          <div className="list__container">
+            <ComponentToRender {...props} />
+          </div>
+        )}
       </div>
     );
   }

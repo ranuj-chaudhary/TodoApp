@@ -9,6 +9,7 @@ import { withToggle } from '../../shared/withToggle';
 
 // HELPERS
 import { filterData, filteredIncompletedTodayTasks } from '../../utils/helper';
+import RegularList from '../../shared/RegularList';
 
 function TodayIncompleteTasks() {
   // GLOBAL STATE
@@ -21,11 +22,7 @@ function TodayIncompleteTasks() {
   const todayIncompletedTasks = filteredIncompletedTodayTasks(sortedData);
 
   return (
-    <ul className="incomplete_task flex flex-col gap-4 p-4">
-      {todayIncompletedTasks &&
-        todayIncompletedTasks.length > 0 &&
-        todayIncompletedTasks.map((task) => <Todo todo={task} key={task.id} />)}
-    </ul>
+    <RegularList tasks={todayIncompletedTasks} todo={Todo} />
   );
 }
 

@@ -6,7 +6,7 @@ import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 const todoThemeStyle = {
   button:
-    'bg-white opacity-80 hover:opacity-100 p-2.5 rounded-md transition-colors duration-200',
+    'bg-white opacity-80 border-2 hover:opacity-100 p-2.5 rounded-md transition-colors duration-200',
 };
 export const TodoTheme = () => {
   const [toggle, setToggle] = useState(false);
@@ -31,7 +31,7 @@ export const TodoTheme = () => {
     <div className="todo__theme relative">
       <button
         className={`${todoThemeStyle.button} ${
-          toggle ? 'border-2 border-blue-400 opacity-100' : ''
+          toggle ? ' border-blue-400 opacity-100' : 'border-transparent'
         }`}
         onClick={handleToggle}
       >

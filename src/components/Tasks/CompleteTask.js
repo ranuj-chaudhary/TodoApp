@@ -9,6 +9,7 @@ import { withToggle } from '../../shared/withToggle';
 
 // HELPERS
 import { filterData } from '../../utils/helper';
+import RegularList from '../../shared/RegularList';
 
 function CompletedTasks() {
   const { todos, sortBy } = useSelector((state) => state.todo);
@@ -19,12 +20,9 @@ function CompletedTasks() {
   // FILTER BY COMPLETED TASKS
   let completedTasks = sortedData.filter((task) => task.taskCompleted === true);
 
+
   return (
-    <ul className="complete_task flex flex-col gap-4 p-4">
-      {completedTasks &&
-        completedTasks.length > 0 &&
-        completedTasks.map((task) => <Todo todo={task} key={task.id} />)}
-    </ul>
+    <RegularList tasks={completedTasks} todo={Todo} />
   );
 }
 

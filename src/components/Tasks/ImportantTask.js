@@ -9,6 +9,7 @@ import { withToggle } from '../../shared/withToggle';
 
 // HELPERS
 import { filterData } from '../../utils/helper';
+import RegularList from '../../shared/RegularList';
 
 function ImportantTask() {
   // GLOBAL STATE
@@ -21,11 +22,7 @@ function ImportantTask() {
   const urgentTask = sortedData.filter((task) => task.urgentTask === true);
 
   return (
-    <ul className="complete_task flex flex-col gap-4 p-4">
-      {urgentTask &&
-        urgentTask.length > 0 &&
-        urgentTask.map((task) => <Todo todo={task} key={task.id} />)}
-    </ul>
+    <RegularList tasks={urgentTask} todo={Todo} />
   );
 }
 export default withToggle(ImportantTask);
