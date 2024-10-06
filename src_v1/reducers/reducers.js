@@ -19,7 +19,6 @@ const initialState = {
   userId: '123455',
   username: 'Ranuj Choudhary',
   password: 'password',
-  is_admin: false,
   todos: [
     {
       id: '1',
@@ -88,6 +87,7 @@ const initialState = {
   deletedTodos: [],
   category: ['grocery', 'office work', 'personal work'],
   error: '',
+  is_admin: false,
   sortBy: '',
   defaultList: [
     {
@@ -245,14 +245,14 @@ export const errorMessage = function (erroMessage) {
   };
 };
 
-export const updateCompletedStatus = function (id, status) {
+export const completeTask = function (id, status) {
   return {
     type: actiontypes.TASK_COMPLETED,
     payload: { id, status },
   };
 };
 
-export const updateUrgentStatus = function (id) {
+export const updateUrgentTask = function (id) {
   return {
     type: actiontypes.URGENT_TASK,
     payload: { id },
