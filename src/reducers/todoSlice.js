@@ -1,25 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
-import moment from 'moment/moment';
-import { SunIcon, StarLineIcon, HomeIcon } from '../icons/icons';
-
-// ACTION TYPES
-
-const actiontypes = {
-  ADD_TODO: 'ADD_TODO',
-  DELETE_TODO: 'DELETE_TODO',
-  ERROR: '',
-  TASK_COMPLETED: 'TASK_COMPLETED',
-  SORT_TODO: 'SORT_TODO',
-  URGENT_TASK: 'URGENT_TASK',
-  ADD_CUSTOMLIST: 'ADD_CUSTOMLIST',
-  DELETE_CUSTOMLIST: 'DELETE_CUSTOMLIST',
-};
-
 const initialState = {
-  userId: '123455',
-  username: 'Ranuj Choudhary',
-  password: 'password',
-  is_admin: false,
   todos: [
     {
       id: '1',
@@ -86,44 +65,7 @@ const initialState = {
     },
   ],
   deletedTodos: [],
-  category: ['grocery', 'office work', 'personal work'],
   error: '',
-  sortBy: '',
-  defaultList: [
-    {
-      name: 'My day',
-      icon: <SunIcon className="text-blue-300" />,
-      url: 'myday',
-      id: '1',
-      listKey: 'TotalTodayTask',
-    },
-    {
-      name: 'Important',
-      icon: <StarLineIcon className="text-pink-500" />,
-      url: 'important',
-      id: '2',
-      listKey: 'Important',
-    },
-    {
-      name: 'Task',
-      icon: <HomeIcon className="text-pink-500" />,
-      url: 'tasks',
-      id: '4',
-      listKey: 'TotalTask',
-    },
-  ],
-  customList: [
-    {
-      name: 'javascript',
-      url: 'customlist',
-      id: '1232',
-    },
-    {
-      name: 'react',
-      url: 'customlist',
-      id: '12',
-    },
-  ],
 };
 
 // REDUCER

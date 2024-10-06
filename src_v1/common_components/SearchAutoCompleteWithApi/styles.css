@@ -1,0 +1,14 @@
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+  border-bottom: 1px solid black;
+  width: 100%;
+}
+
+input {
+  width: 300px;
+}

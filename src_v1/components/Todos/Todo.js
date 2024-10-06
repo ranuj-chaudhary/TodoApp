@@ -1,17 +1,22 @@
 import { useDispatch } from 'react-redux';
-import {
-  updateCompletedStatus,
-  deleteTodo,
-  updateUrgentStatus,
-} from '../../reducers/reducers';
+import { updateCompletedStatus, deleteTodo } from '../../reducers/reducers';
 import { getCurrentDateTime } from '../../utils/helper';
+import { updateUrgentTask } from '../../reducers/reducers';
 
 //icons
 import { StarIcon, DeleteIcon } from '../../icons/icons';
 
 export const Todo = ({ todo }) => {
   const dispatch = useDispatch();
-  const { content, timeStamp, id, taskCompleted, urgentTask } = todo;
+  const {
+    heading,
+    content,
+    timeStamp,
+    id,
+    isPrivate,
+    taskCompleted,
+    urgentTask,
+  } = todo;
   const { presentDate, presentTime } = getCurrentDateTime(timeStamp);
 
   function handleToChangeTodoStatus(e) {
@@ -20,7 +25,8 @@ export const Todo = ({ todo }) => {
   }
 
   function handleUrgentStar(id) {
-    dispatch(updateUrgentStatus(id));
+    dispatch(updateUrgentTask(id));
+    console.log(id);
   }
 
   function handleDelete(id) {
