@@ -1,0 +1,57 @@
+{
+    "user" : {
+        "data": [{
+        "userId": "123455",
+        "username": "Ranuj Choudhary",
+        "email" : "ranujchoudhary@gmail.com",
+        "password": "password",
+        "is_admin": false,
+        "defaultList": [
+          {
+            "name": "My day",
+            "url": "myday",
+            "id": "1",
+            "listKey": "TotalTodayTask"
+          },
+          {
+            "name": "Important",
+            "url": "important",
+            "id": "2",
+            "listKey": "Important"
+          },
+          {
+            "name": "Task",
+            "url": "tasks",
+            "id": "4",
+            "listKey": "TotalTask"
+          }
+        ],
+        "customList": [
+        {
+          "name": "javascript",
+          "url": "customlist",
+          "id": "1232"
+        },
+        {
+          "name": "react",
+          "url": "customlist",
+          "id": "12"
+        }
+      ],
+      "todos": {
+       "data": [{
+          "id": "1",
+          "content": "Advice the redux",
+          "taskCompleted": true,
+          "timeStamp": "2024-01-31T15:28:43+05:30",
+          "urgentTask": false,
+          "private": false,
+          "dueDate": "2024-08-31T15:28:43+05:30",
+          "category": "task"
+        }],
+     "deleted": []}
+    }]
+        
+      }
+      
+}

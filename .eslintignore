@@ -1,0 +1,18 @@
+module.exports = {
+  env: {
+    // ...
+  },
+  extends: [
+    // ...
+  ],
+  parserOptions: {
+    // ...
+  },
+  plugins: [
+    // ...
+  ],
+  rules: {
+    // ...
+  },
+  ignorePatterns: ["src_v1/*"], // <<< ignore all files in test folder
+};

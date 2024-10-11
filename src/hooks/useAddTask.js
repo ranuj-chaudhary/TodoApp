@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { errorMessage } from '../reducers/reducers';
-import { addTodo } from '../reducers/reducers';
+
+import { addTodo } from '../features/todos/components/todoSlice';
 
 export const useAddTask = function () {
   const [taskTodo, setTaskTodo] = useState('');
@@ -10,6 +10,7 @@ export const useAddTask = function () {
 
   function handleTaskTodoChange(e) {
     let query = e.target.value;
+
     if (query.length > 120) {
       query = query.slice(0, 120) + '...';
     }
@@ -20,7 +21,6 @@ export const useAddTask = function () {
     if (event.key === 'Enter') {
       if (taskTodo.length > 0) {
         dispatch(addTodo(taskTodo, listType));
-        dispatch(errorMessage(''));
         setTaskTodo('');
       }
     }

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CustomListItem } from './CustomListItem';
 import { PlusIcon } from '../../icons/icons';
 import { addCustomList } from '../../reducers/reducers';
-
+import { createList } from '../../utils/helper';
 // styles
 const customListStyle = {
   list: 'mb-2 flex items-center justify-between p-[6px] hover:bg-gray-100 active:scale-95 transition-colors transition-transform duration-300 cursor-pointer ',
@@ -13,11 +13,11 @@ export function CustomList({ selectedId, onSelectid }) {
   const dispatch = useDispatch();
 
   function handleAddCustomList() {
-    console.log('clicked')
-    dispatch(addCustomList(''));
+      const newList = createList('')
+       dispatch(addCustomList(newList));
   }
   return (
-    <div className="custom__list mt-6 overflow-y-auto h-2/5">
+    <div className="custom__list mt-6 h-2/5 overflow">
       <div className="list">
         {
           <ul>

@@ -1,7 +1,7 @@
 // import { useSelector } from 'react-redux';
 
 // // COMPONENTS
-// import { Todo } from '../../features/todos/components/Todo';
+// import { Todo } from '../Todos/Todo';
 
 // // SHARED CONPONENTS
 // import { withToggle } from '../../shared/withToggle';

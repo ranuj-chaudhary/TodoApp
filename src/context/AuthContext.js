@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
 
 const AuthContext = createContext();
 
@@ -59,9 +59,28 @@ function AuthProvider({ children }) {
   );
   const { emailError, passwordError } = loginError;
 
+  useEffect(() => {
+    const userState = JSON.parse(localStorage.getItem('user'));
+    if (userState.isAuthenticated) {
+      dispatch({ type: actionTypes.LOGIN, payload: FAKE_USER });
+    }
+  }, []);
+
   function login(email, password) {
+    const user = JSON.parse(localStorage.getItem('user'));
     if (FAKE_USER.email === email && FAKE_USER.password === password) {
       dispatch({ type: actionTypes.LOGIN, payload: FAKE_USER });
+
+      if (!user) {
+        const user = {
+          email,
+          isAuthenticated: true,
+        };
+        localStorage.setItem('user', JSON.stringify(user));
+      } else {
+        user.isAuthenticated = true;
+        localStorage.setItem('user', JSON.stringify(user));
+      }
     } else if (FAKE_USER.email !== email) {
       dispatch({
         type: actionTypes.LOGIN_ERROR,
@@ -84,6 +103,9 @@ function AuthProvider({ children }) {
 
   function logout() {
     dispatch({ type: actionTypes.LOGOUT });
+    const user = JSON.parse(localStorage.getItem('user'));
+    user.isAuthenticated = false;
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   return (
@@ -102,12 +124,21 @@ function AuthProvider({ children }) {
   );
 }
 
+export function authLogin(email, password) {
+  const FAKE_USER = {
+    name: 'Ranuj Chaudhary',
+    email,
+    password,
+    userImage: 'https://i.pravatar.cc/100?u=zz',
+  };
+  return { type: actionTypes.LOGIN, payload: FAKE_USER };
+}
+
 function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {
     return 'Problem fetching auth context.';
   }
-
   return context;
 }
 
