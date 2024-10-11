@@ -1,15 +1,15 @@
 import { useRef, useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
-
+import { useAuth } from '../../../context/AuthContext';
 // icons
-import { SearchIcon } from '../../icons/icons';
 import {
+  SearchIcon,
   ListUpIcon,
   ListDownIcon,
   SettingIcon,
   LogoutIcon,
-} from '../../icons/icons';
-import { useOutsideClick } from '../../hooks/useOutsideClick';
+} from '../../../components/ui';
+
+import { useOutsideClick } from '../../../hooks/useOutsideClick';
 
 // styles
 const profilteStyles = {
@@ -24,7 +24,7 @@ const profilteStyles = {
   li: 'p-2 flex items-center gap-2 hover:bg-gray-100 rounded-md',
 };
 
-export function Profile() {
+export default function Profile() {
   const { user, logout } = useAuth();
   const [toggle, setToggle] = useState(false);
   const ref = useRef(null);

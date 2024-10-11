@@ -1,8 +1,16 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { findTotalTaskByList } from '../../utils/helper';
-import { NotificationBubble } from './NotificationBubble';
-export function ListItem({ list, onSelectid, selectedId, listStyle }) {
+
+// helpers
+import { findTotalTaskByList } from '../../../utils/helper';
+
+// ui component
+import { NotificationBubble } from '../../../components/ui';
+
+
+
+
+export default function DefaultListItem({ list, onSelectid, selectedId, listStyle }) {
   const { name, id, icon, url } = list;
   const { todos } = useSelector((state) => state.todo);
   const totalTask = findTotalTaskByList(name, todos);
@@ -18,7 +26,10 @@ export function ListItem({ list, onSelectid, selectedId, listStyle }) {
         <div className="flex gap-3 items-center">
           {icon} <span className="capitalize">{name}</span>
         </div>
-        <NotificationBubble totalTask={totalTask} backgroundColor='bg-blue-200'/>
+        <NotificationBubble
+          totalTask={totalTask}
+          backgroundColor="bg-blue-200"
+        />
       </li>
     </Link>
   );

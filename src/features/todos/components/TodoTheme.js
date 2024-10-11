@@ -1,14 +1,22 @@
 import { useRef, useState } from 'react';
-import { AiOutlineMore } from 'react-icons/ai';
-import { useTheme } from '../../context/useThemeContext';
-import { SET_THEME } from '../../context/useThemeContext';
-import { useOutsideClick } from '../../hooks/useOutsideClick';
 
+// Icons
+import { AiOutlineMore } from 'react-icons/ai';
+
+// Theme Context
+import { useTheme } from '../../../context/useThemeContext';
+import { SET_THEME } from '../../../context/useThemeContext';
+
+// Hooks
+import { useOutsideClick } from '../../../hooks/useOutsideClick';
+
+// Styles
 const todoThemeStyle = {
   button:
     'bg-white opacity-80 border-2 hover:opacity-100 p-2.5 rounded-md transition-colors duration-200',
 };
-export const TodoTheme = () => {
+
+export default function TodoTheme() {
   const [toggle, setToggle] = useState(false);
   const { dispatch, themeColors, currentTheme } = useTheme();
   const [seletedTheme, setSelectedTheme] = useState(currentTheme.id);
@@ -64,4 +72,4 @@ export const TodoTheme = () => {
       )}
     </div>
   );
-};
+}

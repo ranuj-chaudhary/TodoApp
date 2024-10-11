@@ -9,11 +9,10 @@ const customListStyle = {
 };
 
 export function CustomList({ selectedId, onSelectid }) {
-  const { customList } = useSelector((state) => state.todo);
+  const { customList } = useSelector((state) => state.customList);
   const dispatch = useDispatch();
 
   function handleAddCustomList() {
-    console.log('clicked')
     dispatch(addCustomList(''));
   }
   return (
@@ -30,23 +29,21 @@ export function CustomList({ selectedId, onSelectid }) {
                 listStyle={customListStyle.list}
               />
             ))}
-            {customList.length === 0 && (
-              <li>
-                <div className=" flex items-center justify-center">
-                  <button
-                    className="flex w-32 gap-2 rounded-md bg-blue-200 p-2 bg-opacity-70"
-                    onClick={handleAddCustomList}
-                  >
-                    <span>
-                      <PlusIcon size={24} />
-                    </span>
-                    Add list
-                  </button>
-                </div>
-              </li>
-            )}
           </ul>
         }
+        {customList.length === 0 && (
+          <div className=" flex items-center justify-center">
+            <button
+              className="flex w-32 gap-2 rounded-md bg-blue-200 p-2 bg-opacity-70"
+              onClick={handleAddCustomList}
+            >
+              <span>
+                <PlusIcon size={24} />
+              </span>
+              Add list
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

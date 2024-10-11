@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { PlusIcon } from '../../icons/icons';
 import { useDispatch } from 'react-redux';
-import { addCustomList, errorMessage } from '../../reducers/reducers';
+
+import {PlusIcon} from "../../../components/ui"
+import { addCustomList } from './customListSlice';
+
 const addListStyle = {
   input:
     'border-2 border-gray-200  w-full rounded-s-md  p-2 text-sm focus:outline-blue-400 focus:border-b-2 focus:border-blue',
@@ -10,7 +12,7 @@ const addListStyle = {
 export function AddList() {
   const [listName, setListName] = useState('');
   const dispatch = useDispatch();
-  console.log(typeof listName)
+ 
   function handleListName(e) {
     if (e.target.value.length <= 30) {
       setListName(e.target.value);

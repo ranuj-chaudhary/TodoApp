@@ -129,66 +129,17 @@ const initialState = {
 // REDUCER
 function todoReducer(state = initialState, action) {
   switch (action.type) {
-    case actiontypes.ADD_TODO:
-      return {
-        ...state,
-        todos: [...state.todos, action.payload.todo],
-      };
-    case actiontypes.DELETE_TODO:
-      const deletedTask = state.todos.find(
-        (todo) => todo.id === action.payload.id
-      );
-      return {
-        ...state,
-        todos: state.todos.filter((todo) => todo.id !== action.payload.id),
-        deletedTodos: [...state.deletedTodos, deletedTask],
-      };
-    case actiontypes.ERROR:
+   case actiontypes.ERROR:
       return {
         ...state,
         error: action.payload.error,
       };
-    case actiontypes.TASK_COMPLETED:
-      const updatedTodos = state.todos.map((item) => {
-        if (item.id === action.payload.id) {
-          return {
-            ...item,
-            taskCompleted: action.payload.status,
-          };
-        } else {
-          return item;
-        }
-      });
-      return {
-        ...state,
-        todos: [...updatedTodos],
-      };
-    case actiontypes.URGENT_TASK:
-      const updatedUrgentTask = state.todos.map((item) => {
-        if (item.id === action.payload.id) {
-          const changeStatus = item.urgentTask;
-          return {
-            ...item,
-            urgentTask: !changeStatus,
-          };
-        } else {
-          return item;
-        }
-      });
+  
 
-      return {
-        ...state,
-        todos: [...updatedUrgentTask],
-      };
-    case actiontypes.SORT_TODO:
-      return {
-        ...state,
-        sortBy: action.payload.sortBy,
-      };
     case actiontypes.ADD_CUSTOMLIST:
       return {
         ...state,
-        customList: [...state.customList, action.payload.list],
+        customList: [...state.customList, action.payload],
       };
     case actiontypes.DELETE_CUSTOMLIST:
       return {
@@ -209,27 +160,7 @@ function todoReducer(state = initialState, action) {
   }
 }
 
-// ACTION CREATORS TODO
-export const addTodo = function addTodo(taskTodo, category) {
-  let id = uuidv4();
-  const timeStamp = moment().format();
-  const listCategory = category.length > 0 ? category : 'task';
 
-  const todo = {
-    id,
-    content: taskTodo,
-    taskCompleted: false,
-    timeStamp: timeStamp,
-    urgentTask: false,
-    isPrivate: false,
-    category: listCategory,
-    dueDate: '2024-02-31T15:28:43+05:30',
-  };
-  return {
-    type: actiontypes.ADD_TODO,
-    payload: { todo },
-  };
-};
 
 export const deleteTodo = function (id) {
   return {
@@ -245,43 +176,16 @@ export const errorMessage = function (erroMessage) {
   };
 };
 
-export const updateCompletedStatus = function (id, status) {
-  return {
-    type: actiontypes.TASK_COMPLETED,
-    payload: { id, status },
-  };
-};
 
-export const updateUrgentStatus = function (id) {
-  return {
-    type: actiontypes.URGENT_TASK,
-    payload: { id },
-  };
-};
 
 // // ACTION CREATORS SORTBY
 
-export const sortTodo = function (sortBy) {
-  return {
-    type: actiontypes.SORT_TODO,
-    payload: { sortBy },
-  };
-};
 
-export const addCustomList = function (listName) {
-  let id = uuidv4();
-  if (listName.length === 0) {
-    listName = 'untitled list';
-  }
 
-  const newList = {
-    name: listName.toLowerCase(),
-    url: 'customlist',
-    id,
-  };
-  return {
+export const addCustomList = function (list) {
+   return {
     type: actiontypes.ADD_CUSTOMLIST,
-    payload: { list: newList },
+    payload: list,
   };
 };
 export const deleteCustomList = function (id, listName) {

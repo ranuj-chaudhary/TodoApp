@@ -1,8 +1,12 @@
-import { Profile } from './Profile';
-import { DefaultList } from './DefaultList';
 import { useState } from 'react';
-import { AddList } from './AddList';
-import { CustomList } from './CustomList';
+
+// components
+// import { Profile } from './Profile';
+// import { DefaultList } from './DefaultList';
+// import { AddList } from './AddList';
+// import { CustomList } from './CustomList';
+import { Profile } from '../features/profile';
+import { DefaultList } from '../features/default-list';
 
 export const Sidebar = () => {
   const [selectedId, setSelectedId] = useState(1);
@@ -13,10 +17,8 @@ export const Sidebar = () => {
     <div className="side_bar w-1/5 px-4 pt-4 relative">
       <Profile />
       <DefaultList selectedId={selectedId} onSelectid={handleSelectId} />
-      <CustomList selectedId={selectedId} onSelectid={handleSelectId} />
-      <AddList />
+      {/*<CustomList selectedId={selectedId} onSelectid={handleSelectId} />
+      <AddList /> */}
     </div>
   );
 };
-
-

@@ -1,10 +1,25 @@
-import { TodayIncompleteTasks, TodayCompletedTasks } from '../components/Tasks';
+import Tasks from '../components/Tasks/Tasks';
+import {
+  filteredCompletedTodayTasks,
+  filteredIncompletedTodayTasks,
+} from '../utils/helper';
 
-export  function MyDay() {
+export default function MyDay() {
   return (
     <div className="My day">
-      <TodayIncompleteTasks toggleName={'Incompleted'} />
-      <TodayCompletedTasks toggleName={'Completed'} />
+      <Tasks
+        toggleName="Incomplete"
+        onFilterTask={(sortedData) => {
+         
+                  return filteredIncompletedTodayTasks(sortedData);
+        }}
+      />
+      <Tasks
+        toggleName="Completed"
+        onFilterTask={(sortedData) => {
+          return filteredCompletedTodayTasks(sortedData);
+        }}
+      />
     </div>
   );
 }

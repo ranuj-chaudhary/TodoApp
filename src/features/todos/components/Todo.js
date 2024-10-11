@@ -1,22 +1,23 @@
 import { useDispatch } from 'react-redux';
 import {
-  updateCompletedStatus,
+  updateCompleteStatus,
   deleteTodo,
   updateUrgentStatus,
-} from '../../reducers/reducers';
-import { getCurrentDateTime } from '../../utils/helper';
+} from './todoSlice';
 
+import { getCurrentDateTime } from '../../../utils/helper';
 //icons
-import { StarIcon, DeleteIcon } from '../../icons/icons';
+import { StarIcon, DeleteIcon } from '../../../components/ui';
 
-export const Todo = ({ todo }) => {
+export default function Todo({ todo }) {
   const dispatch = useDispatch();
   const { content, timeStamp, id, taskCompleted, urgentTask } = todo;
   const { presentDate, presentTime } = getCurrentDateTime(timeStamp);
 
   function handleToChangeTodoStatus(e) {
+    console.log(e)
     let isChecked = e.target.checked;
-    dispatch(updateCompletedStatus(id, isChecked));
+    dispatch(updateCompleteStatus(id, isChecked));
   }
 
   function handleUrgentStar(id) {
@@ -49,7 +50,10 @@ export const Todo = ({ todo }) => {
         <StarIcon
           color={`${urgentTask ? '#333333' : '#999999'}`}
           size={20}
-          onClick={() => handleUrgentStar(id)}
+          onClick={(e) => {
+            e.stopPropagation()
+            handleUrgentStar(id);
+          }}
         />
       </div>
       <div className="important_task cursor-pointer flex items-center pl-2">
@@ -64,4 +68,4 @@ export const Todo = ({ todo }) => {
       </div>
     </li>
   );
-};
+}

@@ -1,14 +1,22 @@
-import { CompletedTasks, IncompleteTasks } from '../components/Tasks';
+import Tasks from '../components/Tasks/Tasks';
+import { filterByCompleteTask, filterByIncompleteTask } from '../utils/helper';
 
-export function TasksTodo() {
+export default function TasksTodo() {
   return (
     <div className="My day">
-      <IncompleteTasks
-        toggleName={'Pending'}
+      <Tasks
+        onFilterTask={(data) => {
+          return filterByIncompleteTask(data);
+        }}
+        toggleName={'Incomplete'}
       />
-      <CompletedTasks
-        toggleName={'Done'}
+      <Tasks
+        onFilterTask={(data) => {
+          return filterByCompleteTask(data);
+        }}
+        toggleName={'Completed'}
       />
+     
     </div>
   );
 }

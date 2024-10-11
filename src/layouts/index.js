@@ -1,7 +1,6 @@
 // RE-USABLE COMPONENTS
-
-import { Sidebar } from './components/Sidebar/Sidebar';
-import { Home } from './pages/Home';
+import { Home } from './Home';
+import { Sidebar } from './Sidebar';
 
 export default function TodoLayout() {
   return (

@@ -1,4 +1,4 @@
-import { ListItem } from './ListItem';
+import { ListItem } from './DefaultListItem';
 import { useSelector } from 'react-redux';
 
 const defaultListStyle = {

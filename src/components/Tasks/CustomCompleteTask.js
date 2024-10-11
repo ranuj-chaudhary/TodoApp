@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 
 // COMPONENTS
-import { Todo } from '../Todos/Todo';
+import { Todo } from '../../features/todos/components/Todo';
 import { filterData } from '../../utils/helper';
 
 // SHARED COMPONENTS
@@ -32,9 +32,7 @@ function CustomCompleteTask() {
     );
   }
 
-  return (
-    <RegularList tasks={completedTasks} todo={Todo} />
-  );
+  return <RegularList tasks={completedTasks} todo={Todo} />;
 }
 
 export default withToggle(CustomCompleteTask);

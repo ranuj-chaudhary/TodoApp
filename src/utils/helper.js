@@ -1,5 +1,5 @@
 import moment from 'moment';
-
+import { v4 as uuidv4 } from 'uuid';
 export function getCurrentDateTime(date) {
   const now = moment(date);
   const currentDate = String(now.date());
@@ -31,10 +31,11 @@ export function getCurrentDate() {
 }
 
 export function filterData(todos, sortBy = '') {
-  if (sortBy.length === 0) return todos;
-  let filteredData = [];
+  const tasks = todos.map((task) => task);
+  if (sortBy.length === 0) return tasks;
+  let sortedData = [];
   if (sortBy === 'alphabetically') {
-    filteredData = todos.sort((a, b) => {
+    sortedData = tasks.sort((a, b) => {
       if (a.content < b.content) {
         return -1;
       }
@@ -44,17 +45,17 @@ export function filterData(todos, sortBy = '') {
       return 0;
     });
   } else if (sortBy === 'date') {
-    filteredData = todos.sort((taskA, taskB) => {
+    sortedData = tasks.sort((taskA, taskB) => {
       const dateA = new Date(taskA.timeStamp);
       const dateB = new Date(taskB.timeStamp);
       return dateA - dateB;
     });
   } else if (sortBy === 'importance') {
-    filteredData = todos.sort((taskA, taskB) =>
+    sortedData = tasks.sort((taskA, taskB) =>
       taskA.urgentTask === taskB.urgentTask ? 0 : taskA.urgentTask ? -1 : 1
     );
   }
-  return filteredData;
+  return sortedData;
 }
 
 export function findTotalTaskByList(list, todos, listCategory) {
@@ -62,13 +63,12 @@ export function findTotalTaskByList(list, todos, listCategory) {
   switch (list) {
     case 'Important':
       const totalImportantTasks = todos.filter(
-        (item) => item.urgentTask === true
+        (item) => item.urgentTask === true && item.taskCompleted === false
       );
       return totalImportantTasks.length;
     case 'My day':
-      const mydayCompletedTasks = filteredCompletedTodayTasks(todos);
       const mydayIncompletedTasks = filteredIncompletedTodayTasks(todos);
-      return mydayCompletedTasks.length + mydayIncompletedTasks.length;
+      return mydayIncompletedTasks.length;
     case 'Task':
       return todos.length;
     case 'CustomList':
@@ -80,20 +80,23 @@ export function findTotalTaskByList(list, todos, listCategory) {
 }
 
 // TASK HELPERS
-export function filteredCompletedTodayTasks(data) {
-  return data.filter((task) => {
+export function filteredCompletedTodayTasks(todos) {
+  const tasks = todos.map((todo) => todo);
+  const data = tasks.filter((task) => {
     const date = new Date().toISOString();
     const today = getCurrentDateTime(date);
     const todoDate = getCurrentDateTime(task.timeStamp);
-
     return (
       today.presentDate === todoDate.presentDate && task.taskCompleted === true
     );
   });
+
+  return data;
 }
 
-export function filteredIncompletedTodayTasks(data) {
-  return data.filter((task) => {
+export function filteredIncompletedTodayTasks(todos) {
+  const tasks = todos.map((todo) => todo);
+  const data = tasks.filter((task) => {
     const date = new Date().toISOString();
     const today = getCurrentDateTime(date);
     const todoDate = getCurrentDateTime(task.timeStamp);
@@ -101,6 +104,7 @@ export function filteredIncompletedTodayTasks(data) {
       today.presentDate === todoDate.presentDate && task.taskCompleted === false
     );
   });
+  return data;
 }
 
 export function removeSpaceFromString(stringName) {
@@ -110,4 +114,33 @@ export function removeSpaceFromString(stringName) {
 export function totalCustomList(listCategory, todos) {
   const customList = todos.filter((todo) => todo.category === listCategory);
   return customList.length;
+}
+
+export function createList(listName) {
+  let id = uuidv4();
+  // input validation
+  if (listName.length === 0) {
+    listName = 'untitled list';
+  } else if (listName.length > 30) {
+    listName = listName.slice(0, 30);
+  }
+
+  const newList = {
+    name: listName.toLowerCase().trim(),
+    url: 'customlist',
+    id,
+  };
+  return newList;
+}
+
+export function filterByCompleteTask(todos) {
+  const tasks = todos.map((todo) => todo);
+  const filteredTasks = tasks.filter((task) => task.taskCompleted === true);
+  return filteredTasks;
+}
+
+export function filterByIncompleteTask(todos) {
+  const tasks = todos.map((todo) => todo);
+  const filteredTasks = tasks.filter((task) => task.taskCompleted === false);
+  return filteredTasks;
 }

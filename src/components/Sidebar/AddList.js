@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { PlusIcon } from '../../icons/icons';
 import { useDispatch } from 'react-redux';
-import { addCustomList, errorMessage } from '../../reducers/reducers';
+import { addCustomList } from '../../reducers/reducers';
+import { createList } from '../../utils/helper';
+
 const addListStyle = {
   input:
     'border-2 border-gray-200  w-full rounded-s-md  p-2 text-sm focus:outline-blue-400 focus:border-b-2 focus:border-blue',
@@ -9,31 +11,29 @@ const addListStyle = {
 
 export function AddList() {
   const [listName, setListName] = useState('');
+
   const dispatch = useDispatch();
-  console.log(typeof listName)
+
   function handleListName(e) {
-    if (e.target.value.length <= 30) {
-      setListName(e.target.value);
-    }
+    setListName(e.target.value);
   }
 
-  function handleAddList() {
-    if (listName.length < 30) {
-      dispatch(addCustomList(listName));
-      setListName('');
-    }
+  function handleAddList(e) {
+    const newList = createList(listName);
+    dispatch(addCustomList(newList));
   }
 
   function handleAddListOnEnter(e) {
     if (e.key === 'Enter' && listName.length < 30) {
-      dispatch(addCustomList(listName));
+      const newList = createList(listName);
+      dispatch(addCustomList(newList));
       setListName('');
     }
   }
 
   return (
     <div className="absolute left-0 bottom-0 p-2 w-full ">
-      {listName.length === 30 && (
+      {listName.length > 30 && (
         <p className="red p-2 text-red-600">List name exceeds permited limit</p>
       )}
       <div className="addList relative flex gap-[2px]">
