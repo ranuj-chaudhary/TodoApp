@@ -1,5 +1,5 @@
 import Tasks from '../components/Tasks/Tasks';
-
+import { filteredIncompletedTodayTasks } from '../utils/helper';
 export default function ImportantTodo() {
   return (
     <div className="My day">
@@ -9,7 +9,8 @@ export default function ImportantTodo() {
           const urgentTask = sortedData.filter(
             (todo) => todo.urgentTask === true && todo.taskCompleted === false
           );
-          return urgentTask;
+          const todayImportantTask = filteredIncompletedTodayTasks(urgentTask);
+          return todayImportantTask;
         }}
       />
     </div>

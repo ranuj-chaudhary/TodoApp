@@ -65,12 +65,16 @@ export function findTotalTaskByList(list, todos, listCategory) {
       const totalImportantTasks = todos.filter(
         (item) => item.urgentTask === true && item.taskCompleted === false
       );
-      return totalImportantTasks.length;
+      const todayImportant = filteredIncompletedTodayTasks(totalImportantTasks);
+      return todayImportant.length;
     case 'My day':
       const mydayIncompletedTasks = filteredIncompletedTodayTasks(todos);
       return mydayIncompletedTasks.length;
     case 'Task':
-      return todos.length;
+      const totalIncompleteTask = todos.filter(
+        (item) => item.taskCompleted === false
+      );
+      return totalIncompleteTask.length;
     case 'CustomList':
       const customListLength = totalCustomList(listCategory, todos);
       return customListLength;

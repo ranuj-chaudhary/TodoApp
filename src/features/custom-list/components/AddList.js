@@ -1,18 +1,23 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import {PlusIcon} from "../../../components/ui"
+// icons
+import { PlusIcon } from '../../../components/ui';
+
+// actions
 import { addCustomList } from './customListSlice';
 
+// styles
 const addListStyle = {
   input:
     'border-2 border-gray-200  w-full rounded-s-md  p-2 text-sm focus:outline-blue-400 focus:border-b-2 focus:border-blue',
 };
 
-export function AddList() {
+export default function AddList() {
   const [listName, setListName] = useState('');
   const dispatch = useDispatch();
- 
+
+  // Handlers
   function handleListName(e) {
     if (e.target.value.length <= 30) {
       setListName(e.target.value);
@@ -34,7 +39,7 @@ export function AddList() {
   }
 
   return (
-    <div className="absolute left-0 bottom-0 p-2 w-full ">
+    <div className="p-2 w-full absolute bottom-4">
       {listName.length === 30 && (
         <p className="red p-2 text-red-600">List name exceeds permited limit</p>
       )}
