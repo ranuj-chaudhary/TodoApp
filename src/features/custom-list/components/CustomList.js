@@ -1,23 +1,29 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { CustomListItem } from './CustomListItem';
-import { PlusIcon } from '../../icons/icons';
-import { addCustomList } from '../../reducers/reducers';
 
-// styles
+// Icons UI
+import { AddButton } from '../../../components/ui/Buttons';
+// Actions
+import { addCustomList } from './customListSlice';
+
+// Components
+import AddList from './AddList';
+import CustomListItem from './CustomListItem';
+
+// Styles
 const customListStyle = {
   list: 'mb-2 flex items-center justify-between p-[6px] hover:bg-gray-100 active:scale-95 transition-colors transition-transform duration-300 cursor-pointer ',
 };
 
-export function CustomList({ selectedId, onSelectid }) {
+export default function CustomList({ selectedId, onSelectid }) {
   const { customList } = useSelector((state) => state.customList);
   const dispatch = useDispatch();
 
-  function handleAddCustomList() {
+  function handleAddUntitleCustomList() {
     dispatch(addCustomList(''));
   }
   return (
-    <div className="custom__list mt-6 overflow-y-auto h-2/5">
-      <div className="list">
+    <section className="custom__list mt-6 flex flex-col justify-between flex-1 h-2/5 relative">
+      <div className="overflow-x-scroll w-full h-full">
         {
           <ul>
             {customList.map((list, idx) => (
@@ -32,19 +38,10 @@ export function CustomList({ selectedId, onSelectid }) {
           </ul>
         }
         {customList.length === 0 && (
-          <div className=" flex items-center justify-center">
-            <button
-              className="flex w-32 gap-2 rounded-md bg-blue-200 p-2 bg-opacity-70"
-              onClick={handleAddCustomList}
-            >
-              <span>
-                <PlusIcon size={24} />
-              </span>
-              Add list
-            </button>
-          </div>
+          <AddButton onClick={handleAddUntitleCustomList} />
         )}
       </div>
-    </div>
+      <AddList />
+    </section>
   );
 }

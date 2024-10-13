@@ -8,7 +8,7 @@ const customListStyle = {
   list: 'mb-2 flex items-center justify-between p-[6px] hover:bg-gray-100 active:scale-95 transition-colors transition-transform duration-300 cursor-pointer ',
 };
 
-export function CustomList({ selectedId, onSelectid }) {
+function CustomList({ selectedId, onSelectid }) {
   const { customList } = useSelector((state) => state.todo);
   const dispatch = useDispatch();
 

@@ -22,7 +22,6 @@ const customListSlice = createSlice({
   reducers: {
     addCustomList: {
       prepare(listName) {
-        let id = uuidV4();
         if (listName.length === 0) {
           listName = 'untitled list';
         }
@@ -30,8 +29,9 @@ const customListSlice = createSlice({
         const newList = {
           name: listName.toLowerCase(),
           url: 'customlist',
-          id,
+          id: uuidV4(),
         };
+
         return {
           payload: newList,
         };
@@ -43,11 +43,13 @@ const customListSlice = createSlice({
     deleteCustomList: {
       prepare(id) {
         return {
-          payload: id
-        }
+          payload: id,
+        };
       },
       reducer(state, action) {
-        state.customList.filter((list) => list.id !== action.payload.id);
+        const listIndex = state.customList.findIndex((list) => list.id === action.payload);
+        if (listIndex === -1) return;
+        state.customList.splice(listIndex, 1);
       },
     },
   },

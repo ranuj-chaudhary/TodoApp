@@ -1,17 +1,25 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteCustomList } from '../../reducers/reducers';
-//helpers
-import { findTotalTaskByList } from '../../utils/helper';
-import { removeSpaceFromString } from '../../utils/helper';
 
+// from custom list slice
+import { deleteCustomList } from './customListSlice';
+
+//helpers
+import { removeSpaceFromString } from '../../../utils/helper';
+import { findTotalTaskByList } from '../../../utils/helper';
 //icons
-import { DeleteIcon, UnorderedListIcon } from '../../icons/icons';
+import { DeleteIcon, UnorderedListIcon } from '../../../components/ui';
 
 // reusable component
-import { NotificationBubble } from './NotificationBubble';
+import { NotificationBubble } from '../../../components/ui';
 
-export function CustomListItem({ list, onSelectid, selectedId, listStyle }) {
+// Component
+export default function CustomListItem({
+  list,
+  onSelectid,
+  selectedId,
+  listStyle,
+}) {
   // global state
   const { todos } = useSelector((state) => state.todo);
   const dispatch = useDispatch();
@@ -22,8 +30,10 @@ export function CustomListItem({ list, onSelectid, selectedId, listStyle }) {
   const totalTask = findTotalTaskByList('CustomList', todos, name);
   const type = removeSpaceFromString(name);
 
-  function handleListDelete(id) {
-    dispatch(deleteCustomList(id, name));
+  // handlers
+  function handleCustomListDelete(id) {
+    console.log(id)
+    dispatch(deleteCustomList(id));
   }
   return (
     <Link to={`${url}?type=${type}`}>
@@ -41,7 +51,7 @@ export function CustomListItem({ list, onSelectid, selectedId, listStyle }) {
               <DeleteIcon
                 color={'#333333'}
                 size={20}
-                onClick={() => handleListDelete(id)}
+                onClick={(e) => handleCustomListDelete(id)}
               />
             </span>
           </span>
@@ -56,4 +66,3 @@ export function CustomListItem({ list, onSelectid, selectedId, listStyle }) {
     </Link>
   );
 }
-
