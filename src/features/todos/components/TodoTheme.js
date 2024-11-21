@@ -56,15 +56,16 @@ export default function TodoTheme() {
               {themeColors &&
                 themeColors.length > 0 &&
                 themeColors.map((theme) => (
-                  <li
-                    key={theme.id}
-                    className={`w-8 h-8 ${
-                      seletedTheme === theme.id
-                        ? 'border-2 border-blue-600'
-                        : ''
-                    } cursor-pointer ${theme.style}`}
-                    onClick={() => handleThemeChange(theme.id)}
-                  ></li>
+                  <button onClick={() => handleThemeChange(theme.id)}>
+                    <li
+                      key={theme.id}
+                      className={`w-8 h-8 ${
+                        seletedTheme === theme.id
+                          ? 'border-2 border-blue-600'
+                          : ''
+                      } cursor-pointer ${theme.style}`}
+                    ></li>
+                  </button>
                 ))}
             </ul>
           </div>

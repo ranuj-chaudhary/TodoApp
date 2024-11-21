@@ -61,7 +61,7 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     const userState = JSON.parse(localStorage.getItem('user'));
-    if (userState.isAuthenticated) {
+    if (userState && userState.isAuthenticated) {
       dispatch({ type: actionTypes.LOGIN, payload: FAKE_USER });
     }
   }, []);

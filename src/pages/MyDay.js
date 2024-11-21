@@ -6,7 +6,7 @@ import {
 
 export default function MyDay() {
   return (
-    <div className="My day">
+    <div className="My day new day">
       <Tasks
         toggleName="Incomplete"
         onFilterTask={(sortedData) => {
